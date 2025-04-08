@@ -192,3 +192,45 @@
 		</section>
 	</ng-container>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="white">
+    <ion-row justify-content-center>
+      <!-- Home -->
+      <ion-col col-2>
+        <button ion-button clear (click)="openHome()">
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-col>
+
+      <!-- Chat -->
+      <ion-col col-2>
+        <button ion-button clear (click)="openChat()">
+          <ion-icon name="chatbubbles"></ion-icon>
+        </button>
+      </ion-col>
+
+      <!-- Add Publication -->
+      <ion-col col-2>
+        <div class="add-button-container">
+          <button ion-button color="primary" class="add-button" (click)="addPublication()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </div>
+      </ion-col>
+
+      <!-- Notification -->
+      <ion-col col-2>
+        <button ion-button clear (click)="openNotifications()">
+          <ion-icon name="notifications"></ion-icon>
+        </button>
+      </ion-col>
+
+      <!-- Profile -->
+      <ion-col col-2>
+        <button ion-button clear (click)="openProfile()">
+          <ion-icon name="person"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

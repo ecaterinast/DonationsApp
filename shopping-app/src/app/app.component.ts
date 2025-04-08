@@ -15,23 +15,25 @@ import { MARKET } from '../shared/config';
 export class MyApp {
   rootPage:string =  'MenuPage';
 
-  
-  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen , 
-    private storage : Storage , private app : App ,private translationService : TranslationProvider , 
-    private fcm : FCM , private functionsService : FunctionsProvider , 
+
+  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen ,
+    private storage : Storage , private app : App ,private translationService : TranslationProvider ,
+    private fcm : FCM , private functionsService : FunctionsProvider ,
     private events : Events) {
     this.platform.ready().then(() => {
-      //lang check
-      this.checkLang();
-      //status bar color
-      statusBar.overlaysWebView(false);
-      statusBar.backgroundColorByHexString('#222222');
-      //hide splash
-      splashScreen.hide();
-      //watch back button
-      this.watchBack();
-      //initialize fcm
-      this.initializeFCM();
+      if (this.platform.is('cordova')) {
+        //lang check
+        this.checkLang();
+        //status bar color
+        statusBar.overlaysWebView(false);
+        statusBar.backgroundColorByHexString('#222222');
+        //hide splash
+        splashScreen.hide();
+        //watch back button
+        this.watchBack();
+        //initialize fcm
+        this.initializeFCM();
+      }
     });
   }
 
@@ -70,7 +72,7 @@ export class MyApp {
       })
   }
 
-  //fcm 
+  //fcm
   initializeFCM() {
     this.customerTopic();
     this.fcm.subscribeToTopic('mtgrk-all');
@@ -82,7 +84,7 @@ export class MyApp {
         let body = this.platform.is('ios') ? data.aps.alert.body : data.body;
         this.functionsService.presentToast(body ,'top');
       };
-    });    
+    });
   }
 
   customerTopic() {
@@ -101,6 +103,6 @@ export class MyApp {
   }
 
 
-  
+
 }
 

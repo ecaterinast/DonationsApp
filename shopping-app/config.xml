@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.market.project" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Marostore</name>
-    <description>MaroStore is an online market shopping app</description>
-    <author email="moradabdelgaber1@gmil.com" href="http://ionicframework.com/">Morad Abdelgaber</author>
+    <name>Donat</name>
+    <description>DONAT app</description>
+    <author email="moradabdelgaber1@gmil.com" href="http://ionicframework.com/">Ecaterina Popa
+    </author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

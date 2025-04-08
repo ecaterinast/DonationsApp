@@ -279,11 +279,11 @@ export class HomePage implements OnInit, OnDestroy {
         }
       })
     }
-    
+
   }
 
   // slider && banners detail
-  
+
   adDetail(doc : any) {
     if (doc.product && doc.product != null) {
       this.navCtrl.push('ProductDetailPage', {
@@ -301,5 +301,29 @@ export class HomePage implements OnInit, OnDestroy {
       });
     }
 
+  }
+
+  openHome() {
+    this.navCtrl.setRoot('HomePage');
+  }
+
+  // Chat Page
+  openChat() {
+    this.navCtrl.setRoot('ChatPage');
+  }
+
+// Add Publication Page
+  addPublication() {
+    this.navCtrl.push('AddPublicationPage');
+  }
+
+// Notifications Page
+  openNotifications() {
+    this.navCtrl.setRoot('NotificationsPage');
+  }
+
+// Profile Page
+  openProfile() {
+    this.navCtrl.setRoot('ProfilePage');
   }
 }
