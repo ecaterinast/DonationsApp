@@ -1,0 +1,43 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+		<ion-title>
+			{{'DETAIL.info' | translate}}
+		</ion-title>
+	
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="dismiss()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card *ngIf="product">
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-item no-lines [ngClass]="direction"  *ngFor="let variable of product.details.variables">
+          <ion-label>
+            {{variable.key}}
+          </ion-label>
+          <ion-select [formControlName]="variable.key" [selectOptions]="selectOptions"  [okText]="'ORDER.ok' | translate" [cancelText]="'ORDER.cancel' | translate">
+          
+            <ion-option *ngFor="let value of variable.values" [value]="value.name">
+              {{value.name}}
+              <span *ngIf="value.price">+ {{value.price}} {{'PROFILE.money' | translate}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div padding>
+            <button ion-button block round margin-top  class='no-shadow'>
+              {{'PROFILE.save' | translate}}
+            </button>
+        </div>
+       
+      </form>
+  </ion-card>
+
+
+</ion-content>

@@ -1,0 +1,39 @@
+page-order-detail {
+    img{
+        height: 7rem !important;
+        width: 7rem !important;
+    }
+
+    ion-card{
+        min-height: 10rem;
+        display: flex;
+        align-items: center;
+        ion-item{
+            width: 100%;
+
+            ion-badge{
+                border-radius: 50% !important;
+            }
+        }
+    }
+
+
+
+    .variables{
+        overflow-x: scroll;
+        &::-webkit-scrollbar{
+            width: 0;
+            height: 0;
+        }
+        ion-chip{
+            padding: 0 10px;
+            margin: 0 5px;
+        }
+    }
+
+    .cancel-order{
+        margin: 0;
+        border-radius: 0;
+        height: 5rem;
+    }
+}

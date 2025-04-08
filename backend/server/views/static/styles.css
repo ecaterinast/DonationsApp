@@ -1,0 +1,18 @@
+body{
+    height: 100vh;
+}
+
+
+.height{
+    height: 100%;
+}
+
+.card{
+    border : 1px solid #fff;
+    box-shadow : 0 5pt 15pt 0 rgba(22 ,22 ,22, 0.212)
+}
+
+
+.color{
+    color: #212529cc;
+}

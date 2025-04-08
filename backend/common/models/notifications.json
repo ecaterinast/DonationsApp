@@ -1,0 +1,50 @@
+{
+  "name": "notifications",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "send": {
+      "accepts": [
+        {
+          "arg": "to",
+          "type": "string",
+          "required": true,
+          "description": "topic or decice token"
+        },
+        {
+          "arg": "title",
+          "type": "string",
+          "required": true,
+          "description": "notification title"
+        },
+        {
+          "arg": "body",
+          "type": "string",
+          "required": true,
+          "description": "notification body"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "description": "message id from firebase"
+        }
+      ],
+      "description": "push notifications",
+      "http": [
+        {
+          "path": "/send",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

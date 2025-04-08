@@ -1,0 +1,96 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+    <button nbButton ghost (click)="back()">
+      <nb-icon icon="arrow-back-outline"></nb-icon>
+    </button>
+    {{'FORM.add' | translate}}
+  </nb-card-header>
+  <nb-card-body>
+
+    <!-- image -->
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <label> {{'FORM.image' | translate}} : <span *ngIf="file">{{file.name}}</span></label>
+        <div class="form-group">
+          <div class="custom-file">
+            <input type="file" accept="image/*" class="custom-file-input" id="customFile"
+              (change)="onImageSelected($event)">
+            <label class="custom-file-label" for="customFile">{{'FORM.chooseFile' | translate}}</label>
+          </div>
+        </div>
+
+
+        <hr>
+        <!--  brands -->
+        <div class="form-group">
+          <label>{{'FORM.brand' | translate}} :</label>
+          <nb-select [placeholder]="'FORM.brand' | translate" fullWidth [(ngModel)]="brandId">
+            <nb-option *ngFor="let brand of brands" [value]="brand.id">
+              {{brand.name}}
+            </nb-option>
+          </nb-select>
+        </div>
+
+        <hr>
+
+        <!--  categories -->
+
+        <div class="form-group">
+          <label>{{'FORM.category' | translate}} :</label>
+          <nb-select [placeholder]="'FORM.category' | translate" fullWidth [(ngModel)]="categoryId">
+            <nb-option *ngFor="let cat of categories" [value]="cat.id">
+              {{cat.name}}
+            </nb-option>
+          </nb-select>
+        </div>
+
+
+        <button nbButton hero status="success" (click)="save()" [disabled]="!file">
+          <nb-icon icon="checkmark-circle-outline"></nb-icon>
+          {{'FORM.save'| translate}}
+        </button>
+
+      </div>
+      <!-- product section -->
+
+      <div class="col-sm-12 col-md-6">
+        <!-- search -->
+        <div class="row align-items-center">
+          <div class="col-8">
+            <div class="form-group">
+              <label>{{'FORM.name' | translate}} : </label>
+              <input type="text" nbInput fullWidth [placeholder]="'FORM.name' | translate" [(ngModel)]="searchText">
+            </div>
+          </div>
+          <div class="col">
+            <button type="submit" nbButton hero status="primary" (click)="searchForProduct()">
+              <nb-icon icon="search-outline"></nb-icon>
+              {{'FORM.search'| translate}}
+            </button>
+          </div>
+        </div>
+
+        <!-- products -->
+        <nb-list>
+          <nb-list-item *ngFor="let prod of products">
+            <div class="row align-items-center">
+              <div class="col">
+                <nb-user [picture]="dataService.baseURL + 'containers/images/download/' + prod.image" [name]="prod.name"
+                (click)="chooseProduct(prod)">
+              </nb-user>
+              </div>
+              <div class="col-1">
+                <nb-icon *ngIf="prod.id == product.id" status="primary" icon="checkmark-circle-outline"></nb-icon>
+              </div>
+            </div>
+            
+          </nb-list-item>
+        </nb-list>
+
+      </div>
+
+    </div>
+
+
+  </nb-card-body>
+</nb-card>

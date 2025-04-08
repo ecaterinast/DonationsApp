@@ -1,0 +1,122 @@
+{
+  "name": "product",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "gallery": {
+      "type": [
+        "string"
+      ],
+      "default": []
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "discount": {
+      "type": "number",
+      "default": 0
+    },
+    "available": {
+      "type": "boolean",
+      "default": true
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "variables": {
+      "type": [
+        "object"
+      ],
+      "default": []
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ratings": {
+      "type": "hasMany",
+      "model": "rating",
+      "foreignKey": ""
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "category",
+      "foreignKey": ""
+    },
+    "subcategory": {
+      "type": "belongsTo",
+      "model": "subcategory",
+      "foreignKey": ""
+    },
+    "stocks": {
+      "type": "hasMany",
+      "model": "stock",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "brand",
+      "foreignKey": ""
+    },
+    "ads": {
+      "type": "hasMany",
+      "model": "ad",
+      "foreignKey": ""
+    },
+    "banners": {
+      "type": "hasMany",
+      "model": "banner",
+      "foreignKey": ""
+    },
+    "sliders": {
+      "type": "hasMany",
+      "model": "slider",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,149 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+
+		<ion-buttons left>
+			<button ion-button clear icon-only menuToggle>
+				<ion-icon name="ios-menu-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+
+		<ion-title *ngIf="brand">
+			{{brand.name}}
+		</ion-title>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="favourites()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="favouritesNo">
+					{{favouritesNo}}
+				</ion-badge>
+				<ion-icon name="heart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="cart()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="cartNo">
+					{{cartNo}}
+				</ion-badge>
+				<ion-icon name="ios-cart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+
+	<!-- search bar -->
+	<ion-toolbar no-border color="white">
+		<ion-searchbar mode="ios" [placeholder]="'MENU.search' | translate" (click)="search()"></ion-searchbar>
+
+
+		<ion-buttons right>
+			<button ion-button clear icon-only color="dark" (click)="toggleFilter()">
+				<ion-icon name="md-options"></ion-icon>
+			</button>
+		</ion-buttons>
+
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content class="bg">
+
+	<!--refresher-->
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+
+	<!-- filter -->
+	<div class="filter" [class.show]="showFilter" [ngClass]="direction">
+		<ion-list radio-group [(ngModel)]="priceOrder">
+			<ion-list-header>
+				{{'FILTER.price.order' | translate}}
+			</ion-list-header>
+
+			<ion-item>
+				<ion-label>
+					{{'FILTER.price.desc' | translate}}
+				</ion-label>
+				<ion-radio value="DESC"></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>
+					{{'FILTER.price.asc' | translate}}
+				</ion-label>
+				<ion-radio value="ASC"></ion-radio>
+			</ion-item>
+
+		</ion-list>
+
+		<div class="center">
+			<button ion-button round color="dark" (click)="enableFilter()">
+				{{'MENU.search' | translate}}
+			</button>
+		</div>
+	</div>
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading">
+		<ion-col col-1>
+			<ion-spinner name="bubbles" color="primary"></ion-spinner>
+		</ion-col>
+	</ion-row>
+
+	<!-- products section -->
+	<section [hidden]="loading"  [class.move]="showFilter"uahk class="products">
+		<ion-row *ngIf="products">
+			<ion-col *ngFor="let prod of products;let i = index; trackBy : trackByFun;" col-6 col-sm-6 col-md-4
+				col-lg-3>
+				<ion-card class="product animated fadeIn">
+
+					<!-- add to favourites -->
+					<button ion-button clear icon-only item-end color="danger" class="favourite"
+						(click)="addFavourite(prod , i)" *ngIf="!isFavourite(prod)">
+						<ion-icon name="heart-outline"></ion-icon>
+					</button>
+
+					<!-- remove from favourites -->
+					<button ion-button clear icon-only item-end color="danger" class="favourite"
+						(click)="removeFavourite(prod , i)" *ngIf="isFavourite(prod) || prod.favourite">
+						<ion-icon name="heart"></ion-icon>
+					</button>
+
+					<!-- discount -->
+					<div class="discount" *ngIf="prod.discount">
+						{{prod.discount}} %
+					</div>
+
+					<img class="img" [src]="dataService.baseURL + 'containers/images/download/'+prod.image"
+						onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';" (click)="detail(prod)">
+
+					<ion-card-content (click)="detail(prod)">
+						<ion-badge color="secondary">
+							{{calcRating(prod.ratings)}}
+							<ion-icon name="star"></ion-icon>
+						</ion-badge>
+						<ion-label>{{prod.name}}</ion-label>
+						<p>{{prod.price}} {{'PROFILE.money' | translate}}</p>
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+
+		</ion-row>
+	</section>
+
+
+	<!-- empty section -->
+	<div class="empty-search animated fadeIn" *ngIf="products && products.length == 0 && !loading ">
+		<img src="../../assets/imgs/empty_search.png">
+	</div>
+
+
+	<!--infinite scroll -->
+	<div *ngIf="products">
+		<ion-infinite-scroll *ngIf="products.length != 0" (ionInfinite)="getMore($event)">
+			<ion-infinite-scroll-content></ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+
+</ion-content>

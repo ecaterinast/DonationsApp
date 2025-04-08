@@ -1,0 +1,16 @@
+{
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "allowEternalTokens": true
+  },
+  "ttl": 5184000,
+  "restrictResetPasswordTokenScope": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

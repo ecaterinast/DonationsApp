@@ -1,0 +1,134 @@
+<!-- sliders section-->
+
+<nb-card *ngIf="sliders">
+  <nb-card-header>
+    {{'MOBILE.sliders' | translate}}
+
+    <div class="d-inline-block">
+      <button nbButton ghost status="primary" (click)="modify('sliders')">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row  p-4">
+      <div class="col-sm-12 col-md-4 mt-4" *ngFor="let slider of sliders">
+        <nb-card>
+          <div>
+            <img [src]="this.dataService.baseURL + 'containers/images/download/' + slider.imageURL">
+          </div>
+          <h6 class="mt-2 text-center">
+            <span *ngIf="slider.product">{{slider.product.name}}</span>
+            <span *ngIf="slider.category">{{slider.category.name}}</span>
+            <span *ngIf="slider.brand">{{slider.brand.name}}</span>
+          </h6>
+          <div class="center pb-2">
+            <button nbButton class="m-1" ghost status="success" (click)="modify('sliders' , slider.id)">
+              <nb-icon icon="edit"></nb-icon>
+            </button>
+            <button nbButton class="m-1" ghost status="danger" (click)="delete('sliders' , slider)">
+              <nb-icon icon="trash"></nb-icon>
+            </button>
+          </div>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+<!-- banners section-->
+
+<nb-card *ngIf="banners">
+  <nb-card-header>
+    {{'MOBILE.banners' | translate}}
+
+    <div class="d-inline-block">
+      <button nbButton ghost status="primary" (click)="modify('banners')">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+      </button>
+    </div>
+
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row p-4">
+      <div class="col-sm-12 col-md-4 mt-4" *ngFor="let banner of banners">
+        <nb-card>
+          <div>
+            <img class="banner" [src]="this.dataService.baseURL + 'containers/images/download/' + banner.imageURL">
+          </div>
+          <h6 class="mt-2 text-center" >
+            <span *ngIf="banner.product">{{banner.product.name}}</span>
+            <span *ngIf="banner.category">{{banner.category.name}}</span>
+            <span *ngIf="banner.brand">{{banner.brand.name}}</span>
+          </h6>
+          <div class="center pb-2">
+            <button nbButton class="m-1" ghost status="success" (click)="modify('banners' , banner.id)">
+              <nb-icon icon="edit"></nb-icon>
+            </button>
+            <button nbButton class="m-1" ghost status="danger" (click)="delete('banners' , banner)">
+              <nb-icon icon="trash"></nb-icon>
+            </button>
+          </div>
+        </nb-card>
+      </div>
+
+
+    </div>
+
+  </nb-card-body>
+</nb-card>
+
+
+<!-- home categories section-->
+<nb-card *ngIf="homeCategories" [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+    {{'MOBILE.homeCategories' | translate}}
+
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row p-2">
+      <div class="col-sm-12 col-md-4 mb-2">
+        <nb-select [placeholder]="'FORM.category' | translate" fullWidth [(ngModel)]="category">
+          <nb-option *ngFor="let cat of categories" [value]="cat">
+            {{cat.name}}
+          </nb-option>
+        </nb-select>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <div class="center">
+          <button nbButton hero status="success" [disabled]="!category" (click)="addCategory()">
+            <nb-icon icon="checkmark-circle-outline"></nb-icon>
+            {{'FORM.save' | translate}}
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row  p-2">
+      <div class="col-sm-12 col-md-4 mt-4" *ngFor="let doc of homeCategories">
+        <nb-card>
+          <div *ngIf="doc.categories">
+            <div class="center">
+              <nb-user class="mt-4" [size]="'giant'" [onlyPicture]="true" [size]="'giant'"
+                [picture]="this.dataService.baseURL + 'containers/images/download/' + doc.categories.image"></nb-user>
+            </div>
+          </div>
+          <h6 class="mt-2 text-center" *ngIf="doc.categories">
+            {{doc.categories.name}}
+          </h6>
+          <div class="center pb-2">
+            <button nbButton class="m-1" ghost status="danger" (click)="deleteCategory(doc)">
+              <nb-icon icon="trash"></nb-icon>
+            </button>
+          </div>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

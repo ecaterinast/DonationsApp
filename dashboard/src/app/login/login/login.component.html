@@ -1,0 +1,37 @@
+
+<h1 id="title" class="title">{{'LOGIN.login' | translate}}</h1>
+<p class="sub-title">{{'LOGIN.message' | translate}}</p>
+
+
+<form [formGroup]="form" (ngSubmit)="login()">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">{{'FORM.email' | translate}} :</label>
+    <input nbInput
+    fullWidth
+    [placeholder]="'FORM.email' | translate"
+    fieldSize="large"
+    formControlName="email" type="email">
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label" for="input-password">{{'FORM.password' | translate}} :</label>
+    </span>
+    <input nbInput
+           fullWidth
+           [placeholder]="'FORM.password' | translate"
+           fieldSize="large"
+           formControlName="password" type="password">
+   
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="primary"
+          size="large"
+          [nbSpinner]="loading"
+          [disabled]="!form.valid">
+    {{'LOGIN.login' | translate}}
+  </button>
+</form>

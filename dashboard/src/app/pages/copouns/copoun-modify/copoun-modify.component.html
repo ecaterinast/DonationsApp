@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-header>
+    {{'MENU.copouns' | translate}}
+  </nb-card-header>
+
+  <div class="p-4">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()"> 
+      <div class="form-group">
+        <label>{{'FORM.code'  | translate}} :</label>
+        <input nbInput fullWidth type="text" formControlName="code" [placeholder]="'FORM.code' | translate">
+      </div>
+  
+      <div class="form-group">
+        <label>{{'FORM.discount'  | translate}} :</label>
+        <input nbInput fullWidth type="number" formControlName="discount" [placeholder]="'FORM.discount' | translate">
+      </div>
+  
+  
+      <div class="form-group">
+        <label>{{'FORM.validUntil'  | translate}} :</label>
+        <input fullWidth nbInput [placeholder]="'FORM.validUntil' | translate" [nbDatepicker]="datepicker" formControlName="validUntil">
+        <nb-datepicker #datepicker></nb-datepicker>
+      </div>
+  
+      <div class="center p -4">
+        <button nbButton ghoast status ="success" type="submit">
+          <nb-icon icon="checkmark-circle-outline"></nb-icon>
+          {{'FORM.save' | translate}}
+        </button>
+      </div>
+  
+    </form>
+  </div>
+  
+</nb-card>

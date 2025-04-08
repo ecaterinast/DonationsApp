@@ -1,0 +1,33 @@
+page-rating {
+	
+	.empty-cart{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 18rem;
+        }
+	}
+
+    .user-avatar{
+        width: 6rem !important;
+        height: 6rem !important;
+    }
+
+    .customer-name{
+        font-weight: bold !important;
+        font-size: 1.8rem !important;
+    }
+
+    .comment{
+        color: #222 !important;
+    }
+
+    .border{
+        border-bottom: 1px solid #ccc !important;
+    }
+
+    
+}

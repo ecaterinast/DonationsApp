@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{'TABS.orders' | translate}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFilter()">
+        <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="direction">
+
+
+
+  <!--refresher-->
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--loading spinner -->
+  <ion-row class="ion-justify-content-center ion-align-items-center full-height" *ngIf="loading">
+    <ion-col size="1">
+      <ion-spinner color="primary" class="animated fadeIn"></ion-spinner>
+    </ion-col>
+  </ion-row>
+
+  
+
+  <!--orders-->
+  <ion-row class="ion-justify-content-center" *ngIf="orders && !loading">
+    <ion-col size="12" sizeMd="8" *ngFor="let order of orders; trackBy : trackFn; let i = index">
+      <ion-card mode="ios" class="animated fadeIn" (click)="detail(order.id , i)">
+        <ion-item lines="none">
+          <div class="index" slot="start">
+            {{i+1}}
+          </div>
+          <ion-label>
+            <h2>#{{order.code}}</h2>
+            <h3>{{order.name}}</h3>
+            <p>{{order.createdAt | date:'dd/M/yyyy'}}</p>
+          </ion-label>
+
+          <ion-chip color="danger" *ngIf="order.status == status.cancelled"  slot="end">
+            {{'FORM.cancelled' | translate}}
+          </ion-chip>
+
+          <ion-chip color="primary" *ngIf="order.status == status.confirmed"  slot="end">
+            {{'FORM.confirmed' | translate}}
+          </ion-chip>
+
+          <ion-chip color="success" *ngIf="order.status == status.completed"  slot="end">
+            {{'FORM.completed' | translate}}
+          </ion-chip>
+
+          <ion-chip color="warning" *ngIf="order.status == status.waiting"  slot="end">
+            {{'FORM.waiting' | translate}}
+          </ion-chip>
+          
+
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  	<!-- empty section -->
+    <div class="empty-search animated fadeIn" *ngIf="orders && orders.length == 0 && !loading "> 
+      <img src="../../assets/images/empty_search.png">
+    </div>
+
+
+
+  <!-- filter section -->
+  <div class="filter" [class.show-filter]="filter">
+    <div class="ion-padding" [ngClass]="direction">
+      <ion-item>
+        <ion-icon name="apps-outline" slot="start"></ion-icon>
+        <ion-label>{{'FORM.orderCode' | translate}}</ion-label>
+        <ion-input type="number" [(ngModel)]="code"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>{{'FORM.date' | translate}}</ion-label>
+        <ion-datetime display-format="DD.MM.YYYY" interface="popover" [doneText]="'FORM.ok' | translate"
+          [cancelText]="'FORM.cancel' | translate" [(ngModel)]="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="leaf-outline" slot="start"></ion-icon>
+        <ion-label>{{'FORM.orderStatus' | translate}}</ion-label>
+        <ion-select mode="ios" interface="action-sheet" [cancelText]="'FORM.cancel' | translate" [(ngModel)]="selectedStatus">
+          <ion-select-option [value]="status.waiting">{{'FORM.waiting' | translate}}</ion-select-option>
+          <ion-select-option [value]="status.confirmed">{{'FORM.confirmed' | translate}}</ion-select-option>
+          <ion-select-option [value]="status.completed">{{'FORM.completed' | translate}}</ion-select-option>
+          <ion-select-option [value]="status.cancelled">{{'FORM.cancelled' | translate}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="center">
+
+      
+
+        <ion-button fill="clear" class="search-btn" (click)="search()">
+          <ion-icon name="search-outline" slot="start"></ion-icon>
+          {{'FORM.search' | translate}}
+        </ion-button>
+
+        <ion-button color="dark" fill="clear" class="search-btn" (click)="resetFilter()">
+          <ion-icon name="cog-outline" slot="start"></ion-icon>
+          {{'FORM.reset' | translate}}
+        </ion-button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- infinite scroll -->
+  <ion-infinite-scroll threshold="25%" *ngIf="orders" position="bottom" (ionInfinite)="more($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

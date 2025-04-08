@@ -1,0 +1,17 @@
+
+<nb-card>
+  <nb-card-header>
+    {{'FORM.variables' | translate}}
+  </nb-card-header>
+
+  
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source"
+    (delete)="onDeleteConfirm($event)" 
+    (edit)="edit($event)"
+    (create)="add($event)" >
+    </ng2-smart-table>
+  </nb-card-body>
+
+</nb-card> 
+

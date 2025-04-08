@@ -1,0 +1,21 @@
+<ion-content padding>
+
+
+  <img [src]="dataService.baseURL + 'containers/images/download/'+ ad.imageURL"
+    onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+
+  <ion-row justify-content-between>
+    <ion-col col-6>
+      <button ion-button mode="ios" color="light" block (click)="dismiss()">
+        {{'ORDER.cancel' | translate}}
+      </button>
+    </ion-col>
+
+    <ion-col col-6>
+      <button ion-button block mode="ios" (click)="details()">
+        {{'MESSAGES.details' | translate}}
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

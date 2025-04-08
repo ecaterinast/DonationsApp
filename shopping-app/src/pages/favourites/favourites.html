@@ -1,0 +1,57 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+
+		<ion-buttons left>
+				<button ion-button clear icon-only menuToggle>
+					<ion-icon name="ios-menu-outline"></ion-icon>
+				</button>
+			</ion-buttons>
+		
+    <ion-title>{{'MENU.wishlist' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg">
+
+
+	<!-- products section -->
+	<section>
+		<ion-row *ngIf="products">
+			<ion-col col-6 col-sm-6 col-md-4 col-lg-3 *ngFor="let prod of products; let i = index;">
+				<ion-card class="product animated fadeIn">
+					
+
+					<!-- remove from favourites -->
+					<button ion-button clear icon-only item-end color="danger" class="favourite" (click)="removeFavourite(prod , i)">
+						<ion-icon name="heart"></ion-icon>
+					</button>
+
+					<!-- discount -->
+					<div class="discount" *ngIf="prod.discount">
+						{{prod.discount}} %
+					</div>
+					
+					<img class="img"  [src]="dataService.baseURL + 'containers/images/download/'+prod.image" onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';" (click)="detail(prod)">
+					
+					<ion-card-content (click)="detail(prod)" [ngClass]="direction">
+						<ion-badge color="secondary">
+							 {{calcRating(prod.ratings)}}
+							<ion-icon name="star"></ion-icon>
+						</ion-badge>
+						<ion-label >
+							{{prod.name}}
+						</ion-label>
+						<p>{{prod.price}} {{'PROFILE.money' | translate}}</p>
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+
+		</ion-row>
+	</section>
+
+	<!-- empty section -->
+	<section class="empty-wishlist animated fadeIn" *ngIf="products && products.length == 0"> 
+			<img src="../../assets/imgs/empty_wishlist.png">
+	</section>
+
+</ion-content>

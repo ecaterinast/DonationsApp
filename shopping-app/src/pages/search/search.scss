@@ -1,0 +1,28 @@
+page-search {
+
+    .search-btn{
+        background: #222;
+        color: white !important;
+        width: 53px;
+        border-radius: 16px;
+    }
+
+    .product-avtar{
+        
+        height: 8rem !important;
+        width: 8rem !important;
+       
+    }
+
+    .empty-search{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 18rem;
+        }
+    }
+    
+}

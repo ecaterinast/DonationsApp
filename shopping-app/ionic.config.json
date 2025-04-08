@@ -1,0 +1,7 @@
+{
+  "name": "market",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

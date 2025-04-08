@@ -1,0 +1,48 @@
+page-cash {
+
+
+	ion-step-header .ionic-step-header-icon-active {
+		background-color: #222;
+	}
+
+	button{
+		text-transform: capitalize !important;
+	}
+
+	.margin-left{
+		margin-left: 0.5rem;
+	}
+
+	.margin-top{
+		margin-top: 10px;
+	}
+
+	.address{
+		padding: 0;
+		.icon{
+			margin-right: 0.7rem;
+		}
+
+		.btn {
+		    color: #999;
+		    font-weight: lighter;
+		   
+		}
+
+		ion-item{
+			border-bottom: 1px solid #ccc;
+		}
+
+	}
+
+	.pin{
+		color: #999;
+	   
+	}
+
+	.btn{
+		box-shadow: unset !important;
+	}
+
+	
+}

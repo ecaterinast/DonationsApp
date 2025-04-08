@@ -1,0 +1,28 @@
+page-login {
+    .row {
+        height: 100%;
+    }
+
+    .item {
+        border-radius: 10px;
+        background-color: #f4f4f4;
+        margin-bottom: 1rem;
+        .icon {
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .avatar {
+        border-radius: 50%;
+        width: 13rem;
+        height: 13rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 5pt 11pt 0 rgba(22, 22, 22, 0.212);
+    }
+
+    .social {
+        height: 5rem !important;
+        width: 5rem !important;
+        margin: 0 1rem !important;
+    }
+}

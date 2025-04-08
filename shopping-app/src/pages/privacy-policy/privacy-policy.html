@@ -1,0 +1,63 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+
+    <ion-buttons left *ngIf="!isModal">
+      <button ion-button clear icon-only menuToggle>
+        <ion-icon name="ios-menu-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{'MENU.privacy' | translate}}</ion-title>
+
+
+    <ion-buttons right *ngIf="isModal">
+      <button ion-button clear icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg content" padding>
+
+  <ion-row justify-content-center [ngClass]="direction">
+    <ion-col col-12 col-sm-12 col-md-8>
+      <ng-container *ngIf="lang == 'ar'">
+        <h2>
+          سياسة الخصوصية
+        </h2>
+        <p>
+          تصف سياسة الخصوصية هذه كيفية قيام التطبيق بجمع واستخدام ومشاركة المعلومات الخاصة بك. لا
+          تنطبق سياسة الخصوصية هذه على أنشطة جمع البيانات الخاصة بنا دون الاتصال بالإنترنت أو خارج خدماتنا (ما لم يذكر
+          خلاف ذلك). وباستخدامك خدماتنا، أنت توافق على شروط الاستخدام الخاصة بنا .
+        </p>
+
+        <p>
+          هذا مثال لما يمكن وضعه في سياسة الخصوصية .
+        </p>
+
+
+
+      </ng-container>
+
+      <ng-container *ngIf="lang == 'en'">
+        <h2>Privacy Policy</h2>
+
+        <p>
+          This Privacy Policy describes how Application collect,
+          use and share your information. This Privacy Policy does not apply to our data
+          collection activities without connection to the Internet or outside of our
+          Services (unless otherwise stated). By using our services, you agree to our
+          Terms of Use .
+        </p>
+
+        <p>
+          This is an example of what you can add in privacy policy .
+        </p>
+
+      </ng-container>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

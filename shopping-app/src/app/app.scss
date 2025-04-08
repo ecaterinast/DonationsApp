@@ -1,0 +1,348 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.alert-ios .alert-radio-label {
+  white-space: normal !important;
+}
+
+.scroll-content {
+  border-top: unset !important;
+}
+
+.header-ios .toolbar-background-ios {
+  border-style: unset !important;
+}
+
+.toolbar-ios ion-title {
+  padding-top: 14px !important;
+}
+
+.rtl {
+  direction: rtl !important;
+  text-align: right !important;
+  input {
+    text-align: right !important;
+  }
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 5pt 15pt 0 rgba(22, 22, 22, 0.212);
+  margin-bottom: 15pt;
+}
+
+.ltr {
+  direction: ltr !important;
+  text-align: left !important;
+
+  input {
+    text-align: left !important;
+  }
+}
+
+.col,
+.col-6,
+.col-sm-6,
+.col-md-4,
+.col-lg-3 {
+  padding: 0;
+}
+
+.searchbar-md .searchbar-input {
+  font-weight: lighter;
+}
+
+.popover-content {
+  border-radius: 25px !important;
+  width: 170px !important;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.loading {
+  margin-top: 8rem;
+}
+
+.product {
+  position: relative;
+  box-shadow: unset;
+  border: 1px solid #d4d4d4;
+  border-radius: 9px;
+
+  .favourite {
+    position: absolute;
+    right: -5%;
+    top: -3%;
+  }
+
+  .discount {
+    position: absolute;
+    left: 8px;
+    top: 2%;
+    padding: 0 5px;
+    direction: ltr;
+    background: linear-gradient(#ee3b3b, #d10f0f);
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  img {
+    height: 12rem;
+    max-height: 12rem;
+  }
+
+  .ion-badge {
+    font-size: 1.1rem !important;
+  }
+
+  ion-label {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  p {
+    color: map-get($colors, "primary");
+    font-weight: bold;
+  }
+}
+
+.empty {
+  background: url(../assets/svg/empty.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 90vh;
+}
+
+
+//animation
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion) {
+  .animated {
+    -webkit-animation: unset !important;
+    animation: unset !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+
+//fadeIn
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+//zoomIn
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+}
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+@-webkit-keyframes bounceInLeft {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceInLeft {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bounceInLeft {
+  -webkit-animation-name: bounceInLeft;
+  animation-name: bounceInLeft;
+}
+
+.adModal {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 36rem;
+  height: 38rem;
+  border-radius: 20px;
+  box-shadow: 0 5pt 15pt 0 rgba(22, 22, 22, 0.212);
+
+  .modal-wrapper {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+  }
+}

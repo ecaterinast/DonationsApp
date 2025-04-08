@@ -1,0 +1,93 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+		<ion-title>
+			{{'CART.cart' | translate}}
+		</ion-title>
+	
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="dismiss()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	
+	<!--refresher-->
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading" [hidden]="refresher || products">
+		<ion-col col-1> 
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col> 
+	</ion-row>
+
+	<!-- products -->
+	<div *ngIf="products">
+		<ion-card text-wrap *ngFor="let product of products;let i = index;trackBy : trackFn">
+			<ion-list class="animated fadeIn">
+				<ion-item  [ngClass]="direction">
+					<ion-avatar item-start>
+						<img class="product-img" [src]="dataService.baseURL + 'containers/images/download/' + product.details.image" onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+					</ion-avatar>
+					<h2>
+						{{product.details.name}}
+					</h2>
+					<p class="price">{{product.details.cartPrice}} {{'PROFILE.money' | translate}}</p>
+					<button ion-button clear icon-only color="dark"  (click)="removeProduct(i)">
+						<ion-icon name="trash"></ion-icon>
+					</button>
+
+					<button ion-button clear icon-only color="dark" *ngIf="product.orderedVariables"  (click)="info(product)">
+						<ion-icon name="information-circle"></ion-icon>
+					</button>
+					
+
+					<div  item-end [ngClass]="direction">
+						<button ion-button block clear icon-only color="dark"  (click)="increase(product , i)">
+							<ion-icon name="ios-arrow-up"></ion-icon>
+						</button>
+
+						<p class="animated fadeIn quantity">{{product.amount}}</p>
+
+						<button ion-button block clear icon-only color="dark" (click)="decrease(product , i)">
+							<ion-icon name="ios-arrow-down"></ion-icon>
+						</button>
+
+					</div>
+				</ion-item>
+
+			</ion-list>
+		</ion-card>
+
+	</div>
+
+	<!-- empty section -->
+	<section class="empty-cart animated fadeIn" *ngIf="products && products.length == 0"> 
+			<img src="../../assets/imgs/leaves.png">
+	</section>
+</ion-content>
+
+	<!-- price section -->
+
+<ion-footer mode="ios">
+	<ion-toolbar color="white" class="total" *ngIf="products && products.length != 0">
+		<ion-row>
+			<ion-col padding-left> 
+				<p>		{{'CART.amount' | translate}}			</p>
+				<strong>{{'PROFILE.money' | translate}}</strong>
+				<h6 class="animated fadeIn" *ngIf="total">{{total}}</h6>
+			</ion-col>
+			<ion-col padding-right>
+				<button ion-button block round color="dark" class="btn" (click)="checkout()">
+					{{'CART.checkout' | translate}}
+				</button>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>  
+</ion-footer>

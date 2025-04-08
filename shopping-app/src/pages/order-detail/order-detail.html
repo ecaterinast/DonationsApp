@@ -1,0 +1,59 @@
+
+<ion-header mode="ios">
+  <ion-navbar color="white">
+    <ion-title>
+      {{'MENU.orderDetail' | translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <!-- refresher -->
+  <ion-refresher  (ionRefresh)="onRefresh($event)" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading" [hidden]="refresher">
+		<ion-col col-1> 
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col> 
+	</ion-row>
+
+	<!-- products section -->
+	<ion-row  *ngIf="order"  [hidden]="loading" justify-content-center>
+		<ion-col  col-12 col-sm-12 col-md-6 col-lg-4  *ngFor="let product of order.products;">
+			<ion-card>
+				<ion-item no-lines class="animated fadeIn" (click)="detail(product.details)" [ngClass]="direction">
+					<ion-avatar item-start>
+						<img  [src]="dataService.baseURL + 'containers/images/download/'+product.details.image" onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+					</ion-avatar>
+					<h2>
+            {{product.details.name}}
+          </h2>
+          <div class="variables">
+            <ion-chip color="primary" *ngFor="let variable of product.orderedVariables">
+              {{variable.name}}
+            </ion-chip>
+          </div>
+
+          <button ion-button *ngIf="order.status == status.completed" color="dark" class="no-shadow" (click)="rate(product)">
+              {{'PROFILE.rate' | translate}}
+          </button>
+          
+					<ion-badge item-end color="primary">
+							{{product.amount}}
+          </ion-badge>
+         
+				</ion-item>
+			</ion-card>
+		</ion-col>
+	</ion-row>
+
+</ion-content>
+<ion-footer mode="ios">
+  <button ion-button block color="danger" class="cancel-order" (click)="cancelOrder()" *ngIf="order&&order.status == status.waiting">
+    {{'PROFILE.cancelOrder' | translate}}
+  </button>
+</ion-footer>

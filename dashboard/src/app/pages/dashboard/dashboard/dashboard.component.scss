@@ -1,0 +1,105 @@
+
+
+.stock-alert {
+    nb-card-body{
+        display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    }
+    height: auto !important;
+    
+}
+
+button {
+    padding: 0px 0.4rem !important;
+    margin: 0 10px;
+}
+
+.bg {
+    background-color: #eceff6;
+    height: 100%;
+}
+.header{
+    .title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #121427;
+        margin-bottom: 0 !important;
+    }
+}
+
+.date {
+    font-size: 15px;
+    font-weight: normal;
+    color: #121427;
+    margin-bottom: 0;
+}
+
+.report {
+    padding: 10px 10px 0 0;
+    border-radius: 16px;
+    border: solid 1px #d8d8d8;
+    background-color: #ffffff;
+    display: flex;
+    margin-bottom: 15px;
+
+    div {
+        display: inline-block;
+    }
+
+    .icon {
+        margin-inline-start: 5px;
+        img {
+            width: 73px;
+        }
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 4px !important;
+        color: #121427;
+    }
+
+    .count {
+        font-size: 12px;
+        color: #598bfe;
+    }
+}
+
+.product {
+    height: 91%;
+    padding: 10px;
+    border-radius: 16px;
+    border: solid 1px #d8d8d8;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        width: 50px;
+    }
+
+    .title {
+        font-weight: bold;
+        text-align: center;
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .count {
+        text-align: center;
+        span {
+            display: inline-block;
+            min-width: 76px;
+            padding: 8px;
+            border-radius: 23px;
+            background-color: #598bfe54;
+            font-size: 14px;
+            color: #598bfe;
+        }
+    }
+}

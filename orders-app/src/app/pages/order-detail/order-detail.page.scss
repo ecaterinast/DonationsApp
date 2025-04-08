@@ -1,0 +1,42 @@
+
+
+ion-card{
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+
+    ion-item{
+        width: 100%;
+    }
+}
+
+.avatar {
+    height: 4rem !important;
+    width: 4rem !important;
+    img{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+    }
+}
+
+
+ion-button{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.variables{
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+}
+
+
+.center{
+    display: flex;
+    justify-content: center;
+}

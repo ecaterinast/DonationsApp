@@ -1,0 +1,281 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+    <button nbButton ghost (click)="back()">
+      <nb-icon icon="arrow-back-outline"></nb-icon>
+    </button>
+    {{'FORM.editProduct' | translate}}
+  </nb-card-header>
+  <nb-card-body>
+
+    <nb-stepper orientation="horizontal" linear disableStepNavigation>
+      <nb-step [label]="'FORM.details' | translate" [stepControl]="detailsForm">
+        <form [formGroup]="detailsForm">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="form-group">
+                <nb-checkbox  formControlName="available">
+                  {{'FORM.available' | translate}}
+                </nb-checkbox>
+              </div>
+
+            </div>
+            <div class="col-sm-12 col-md-6">
+
+              
+              <label> {{'FORM.image' | translate}} : <span *ngIf="file">{{file.name}}</span></label>
+              <div class="form-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" (change)="onImageSelected($event)">
+                  <label class="custom-file-label" for="customFile">{{'FORM.chooseFile' | translate}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>{{'FORM.name' | translate}} : </label>
+                <input type="text" nbInput fullWidth [placeholder]="'FORM.name' | translate" formControlName="name">
+              </div>
+
+              <div class="form-group">
+                <label>{{'FORM.price' | translate}} :</label>
+                <input type="number" min="0" nbInput fullWidth [placeholder]="'FORM.price' | translate"
+                  formControlName="price">
+              </div>
+
+              <div class="form-group">
+                <nb-checkbox  formControlName="featured">
+                  {{'FORM.featured' | translate}}
+                </nb-checkbox>
+              </div>
+
+
+            </div>
+
+            <div class="col">
+
+              <div class="form-group">
+                <label>{{'FORM.brand' | translate}} :</label>
+                <nb-select [placeholder]="'FORM.brand' | translate" fullWidth formControlName="brandId">
+                  <nb-option *ngFor="let brand of brands" [value]="brand.id">
+                    {{brand.name}}
+                  </nb-option>
+                </nb-select>
+              </div>
+
+              <div class="form-group">
+                <label>{{'FORM.category' | translate}} :</label>
+                <nb-select [placeholder]="'FORM.category' | translate" fullWidth formControlName="categoryId">
+                  <nb-option *ngFor="let cat of categories" [value]="cat.id">
+                    {{cat.name}}
+                  </nb-option>
+                </nb-select>
+              </div>
+
+
+              <div class="form-group">
+                <label>{{'FORM.subCategory' | translate}} :</label>
+                <nb-select [placeholder]="'FORM.subCategory' | translate" fullWidth formControlName="subcategoryId">
+                  <nb-option *ngFor="let cat of subCategories" [value]="cat.id">
+                    {{cat.name}}
+                  </nb-option>
+                </nb-select>
+              </div>
+
+              <div class="form-group">
+                <label>{{'FORM.discount' | translate}} :</label>
+                <input type="number" min="0" nbInput fullWidth [placeholder]="'FORM.discount' | translate"
+                  formControlName="discount">
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- gallery -->
+        <div class="row" *ngIf="product">
+          <div class="col-sm-12 col-md-6">
+            <label>{{'FORM.gallery' | translate}} :</label>
+            <div class="custom-file">
+              <input type="file" accept="image/*" multiple class="custom-file-input" id="galleryInput"
+                (change)="galleryInputChange($event)">
+              <label class="custom-file-label" for="galleryInput">{{'FORM.chooseFile' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 mt-4" *ngFor="let image of product.gallery;let i = index">
+                <nb-card>
+                  <div>
+                    <img  [src]="this.dataService.baseURL + 'containers/images/download/' + image" alt="">
+                  </div>
+
+                  <div class="center pb-2">
+                    <button nbButton class="m-1" ghost status="danger" (click)="deleteProductImage(i)">
+                      <nb-icon icon="trash"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card>
+              </div>
+
+              <div class="col-sm-12 col-md-4 mt-4" *ngFor="let image of gallery;let i = index">
+                <nb-card>
+                  <div>
+                    <img [src]="image">
+                  </div>
+
+                  <div class="center pb-2">
+                    <button nbButton class="m-1" ghost status="danger" (click)="deleteImage(i)">
+                      <nb-icon icon="trash"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="end">
+          <button nbButton disabled nbStepperPrevious>
+            {{'FORM.prev' | translate}}
+          </button>
+          <button nbButton nbStepperNext class="next" [disabled]="!detailsForm.valid">
+            {{'FORM.next' | translate}}
+          </button>
+        </div>
+      </nb-step>
+
+      <nb-step [label]="'FORM.desc' | translate" [stepControl]="descriptionForm">
+        <form [formGroup]="descriptionForm">
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8">
+              <textarea rows="13" nbInput fullWidth [placeholder]="'FORM.desc' | translate"
+                formControlName="description"></textarea>
+            </div>
+          </div>
+        </form>
+
+        <div class="end margin-top">
+          <button nbButton nbStepperPrevious>
+            {{'FORM.prev' | translate}}
+          </button>
+          <button nbButton nbStepperNext class="next" [disabled]="!descriptionForm.valid">
+            {{'FORM.next' | translate}}
+          </button>
+        </div>
+
+      </nb-step>
+
+      <nb-step [label]="'FORM.variables' | translate">
+
+        <div class="row justify-content-between">
+
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>{{'FORM.stock' | translate}} :</label>
+                  <input type="number" min="0" nbInput fullWidth [placeholder]="'FORM.stock' | translate"
+                    [(ngModel)]="stock">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 " *ngFor="let variable of productVariables; let i = index">
+            <div class="p-1">
+              <nb-card>
+                <div class="section">
+                  <div class="form-group">
+                    <label>{{'FORM.variable' | translate}} :</label>
+                    <nb-select [placeholder]="'FORM.variable' | translate" fullWidth
+                      (selectedChange)="chooseVariable($event , i)">
+                      <nb-option *ngFor="let variable of variables" [value]="variable">
+                        {{variable.key}}
+                      </nb-option>
+                    </nb-select>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label> {{'FORM.key' | translate}} : </label>
+                    <input type="text" nbInput readonly fullWidth [placeholder]="'FORM.name' | translate"
+                      [required]="true" [(ngModel)]="variable.key">
+                  </div>
+
+                  <div class="form-group">
+                    <label> {{'FORM.values' | translate}} : </label>
+                    <div *ngFor="let value of variable.values;let j = index">
+                      <div class="value">
+                        <button nbButton ghost status="danger" type="button" class="close-btn"
+                          (click)="deleteValue(i , j)">
+                          <nb-icon icon="close-circle-outline"></nb-icon>
+                        </button>
+
+                        <div class="form-group">
+                          <input type="text" nbInput readonly fullWidth [placeholder]="'FORM.name' | translate"
+                            [(ngModel)]="value.name">
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>{{'FORM.stock' | translate}} :</label>
+                              <input type="number" min="0" nbInput fullWidth [placeholder]="'FORM.stock' | translate"
+                                [(ngModel)]="value.stock">
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>{{'FORM.price' | translate}} :</label>
+                              <input type="number" min="0" nbInput fullWidth [placeholder]="'FORM.price' | translate"
+                                [(ngModel)]="value.price">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <button nbButton status="danger" type="button" (click)="deleteVariable(i)">
+                    <nb-icon icon="trash"></nb-icon>
+                    {{'FORM.delete' | translate}}
+                  </button>
+
+
+                </div>
+              </nb-card>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button type="button" nbButton hero status="info" (click)="newVariable()">
+          <nb-icon icon="plus-circle-outline"></nb-icon>
+          {{'FORM.newVariable' | translate}}
+        </button>
+
+
+        <div class="end margin-top">
+          <button nbButton nbStepperPrevious>
+            {{'FORM.prev' | translate}}
+          </button>
+          <button nbButton disabled nbStepperNext class="next">
+            {{'FORM.next' | translate}}
+          </button>
+        </div>
+
+
+        <div class="end margin-top">
+          <button type="submit" nbButton hero status="success" (click)="onSubmit()">
+            <nb-icon icon="checkmark-circle-outline"></nb-icon>
+            {{'FORM.save'| translate}}
+          </button>
+        </div>
+
+      </nb-step>
+    </nb-stepper>
+
+  </nb-card-body>
+</nb-card>

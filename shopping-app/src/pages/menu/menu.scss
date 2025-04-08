@@ -1,0 +1,40 @@
+page-menu {
+	.menu_btn{
+		background : transparent !important;
+		color: #fff;
+	}
+
+	
+	.top-header{
+		background-color: transparent;
+		height: 13rem;
+   	 	display: flex;
+
+   	 	h2 , p , .icon{
+   	 		color: #fff !important;
+		}
+			
+		.user-avatar{
+			width: 6rem;
+			height: 6rem;
+		}
+	}
+
+	
+
+	.transparent{
+		background: transparent;
+	}
+
+	ion-list{
+	    margin: 0 0 16px !important;
+	}
+
+	.menu-inner {
+	    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	    background: rgba(2, 2, 2, 0.6) !important;
+	}
+
+	
+}

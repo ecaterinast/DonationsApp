@@ -1,0 +1,28 @@
+
+
+<ion-content [ngClass]="direction">
+  <div class="banner">
+    <div class="image"></div>   
+  </div>
+
+  <ng-container>
+
+    <ion-item>
+      <ion-icon name="language-outline" slot="start"></ion-icon>
+      <ion-label>{{'PROFILE.lang' | translate}}</ion-label>
+      <ion-select mode="ios" [(ngModel)]="lang" interface="action-sheet" [cancelText]="'PROFILE.cancel' | translate" (ionChange)="changeLang($event)">
+        <ion-select-option *ngFor= "let lang of market.languages" [value]="lang.code">{{'PROFILE.' + lang.code | translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="center">
+      <ion-button  (click)="logout()">
+        <ion-label>{{'PROFILE.logout' | translate}}</ion-label>
+      </ion-button>
+    </div>
+
+  </ng-container>
+  
+
+  
+</ion-content>

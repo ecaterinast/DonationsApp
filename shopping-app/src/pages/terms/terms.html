@@ -1,0 +1,61 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+
+    <ion-buttons left *ngIf="!isModal">
+      <button ion-button clear icon-only menuToggle>
+        <ion-icon name="ios-menu-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{'MENU.terms' | translate}}</ion-title>
+
+    <ion-buttons right *ngIf="isModal">
+      <button ion-button clear icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg content" padding>
+
+  <ion-row justify-content-center  [ngClass]="direction">
+    <ion-col col-12 col-sm-12 col-md-8>
+      <ng-container *ngIf="lang == 'ar'">
+
+        <h2>الشروط والأحكام </h2>
+
+      
+        <p>
+          تحدد هذه الشروط قواعد استخدامك تطبيق ، سواء كنت زائراً أو
+          مستخدم مسجل، ويشمل الاستخدام التنصيب أو الدخول إلى أو تصفح أو التسوق أو
+          التسجيل في تطبيق .
+        </p>
+
+        <p>
+          هذا مثال لما يمكن وضعه في الشروط و الأحكام .
+        </p>
+        
+        
+
+      </ng-container>
+
+      <ng-container *ngIf="lang == 'en'">
+        <h2>General Terms & Conditions</h2>
+
+        <p>
+          These terms and conditions govern your use of 
+          Application, whether you are a visitor or a registered user. Use includes
+          access to, browsing, shopping or registering at 
+          Application .
+        </p>
+         <p>
+           This is an example of what you can add in terms and conditions .
+         </p>
+        
+      </ng-container>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

@@ -1,0 +1,94 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+    <ion-title>{{'PROFILE.create' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg">
+
+
+  <ion-row justify-content-center align-items-center>
+    <ion-col col-12 col-sm-12 col-md-9 col-lg-6>
+
+      <div class="center">
+        <div class="image-container">
+          <div class="image-holder">
+            <ion-icon *ngIf="!imageURL" name="camera"></ion-icon>
+            <img *ngIf="imageURL" [src]="imageURL">
+          </div>
+          <label ion-button round icon-only for="image" class="add-image">
+            <ion-icon name="add"></ion-icon>
+          </label>
+          <input type="file" id="image" accept="image/*" hidden (change)="onImageSelected($event)">
+        </div>
+      </div>
+
+
+
+      <ion-card padding>
+        <form [formGroup]="form" >
+          <!-- name -->
+          <ion-item mode="ios" no-lines>
+            <ion-icon name="person" item-start></ion-icon>
+            <ion-input [placeholder]="'FORM.name' | translate" formControlName="name" type="text"></ion-input>
+          </ion-item>
+
+
+          <!-- phone -->
+          <ion-item mode="ios" no-lines>
+            <ion-icon name="call" item-start></ion-icon>
+            <ion-input [placeholder]="'FORM.phone' | translate" formControlName="phone" type="number"></ion-input>
+          </ion-item>
+
+          <!-- email -->
+          <ion-item mode="ios" no-lines>
+            <ion-icon name="mail" item-start></ion-icon>
+            <ion-input [placeholder]="'FORM.email' | translate" formControlName="email" type="email"></ion-input>
+          </ion-item>
+
+          <!-- password -->
+          <ion-item mode="ios" no-lines>
+            <ion-icon name="lock" item-start></ion-icon>
+            <ion-input [placeholder]="'FORM.password' | translate" formControlName="password" type="password">
+            </ion-input>
+          </ion-item>
+
+
+          <!-- repassword -->
+          <ion-item mode="ios" no-lines>
+            <ion-icon name="lock" item-start></ion-icon>
+            <ion-input [placeholder]="'FORM.repassword' | translate" formControlName="repassword" type="password">
+            </ion-input>
+          </ion-item>
+
+        </form>
+
+        <ion-row align-items-center class="check">
+          <ion-col col-1>
+            <ion-checkbox [(ngModel)]="agreeToTerms"></ion-checkbox>
+          </ion-col>
+          <ion-col>
+            <p>
+              {{'MESSAGES.agree' | translate}}
+              <span tappable class="btn" (click)="showTerms()">
+                {{'MENU.terms' | translate}}
+              </span>
+              {{'MESSAGES.and' | translate}}
+              <span tappable class="btn" (click)="showPrivacy()">
+                {{'MENU.privacy' | translate}}
+              </span>
+            </p>
+
+          </ion-col>
+        </ion-row>
+
+        <button ion-button block round  class="white no-shadow" margin-top
+          (click)="onSubmit()">
+          {{'FORM.signup' | translate}}
+        </button>
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

@@ -1,0 +1,80 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+      <ion-buttons left>
+          <button ion-button clear icon-only menuToggle>
+              <ion-icon name="ios-menu-outline"></ion-icon>
+          </button>
+      </ion-buttons>
+
+    <ion-title>
+      {{'MENU.about' | translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  [ngClass]="direction"> 
+
+  <!--refresher-->
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading" [hidden]="contact || refresher">
+		<ion-col col-1> 
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col> 
+  </ion-row>
+
+
+  	<!-- empty section -->
+	<div class="empty-search animated fadeIn" *ngIf="!contact && !loading "> 
+		<img src="../../assets/imgs/empty_search.png">
+	</div>
+
+  
+  
+
+  <div *ngIf="contact" class="animated fadeIn">
+    <ion-item no-lines text-center text-wrap>
+      <h2>{{market.name}}</h2>
+      <p>{{market.description}}</p>
+    </ion-item>
+
+   
+
+    <div class ="center" margin-top>
+        <a ion-button clear icon-only [href]="'https://api.whatsapp.com/send?phone='+ contact.whatsapp">
+          <img src="assets/imgs/whatsapp.png">
+      </a>
+
+      <a ion-button clear icon-only [href]="contact.facebook">
+        <img src="assets/imgs/facebook.png">
+      </a>
+    
+    
+      <a ion-button clear icon-only [href]="'mailto:'+contact.email">
+        <img src="assets/imgs/gmail.png">
+      </a>
+    
+      <a ion-button clear icon-only [href]="smsURL">
+        <img src="assets/imgs/sms.png">
+      </a>
+
+      <a ion-button clear icon-only [href]="'tel:'+contact.phone">
+        <img src="assets/imgs/call.png">
+      </a>
+
+      <a ion-button clear icon-only [href]="telegramURL">
+        <img src="assets/imgs/telegram.png">
+    </a>
+    </div>
+  
+  
+    
+    
+  </div>
+ 
+  
+
+</ion-content>

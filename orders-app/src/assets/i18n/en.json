@@ -1,0 +1,62 @@
+{
+    "MESSAGES": {
+        "error": "an error occurred please try again later",
+        "saved": "Saved Successfully",
+        "subscriptionEnd": "your subscription has been ended !",
+        "incorrectCredentials": "incorrect email or password",
+        "validEmail": "please , enter a valid email",
+        "required": "this field is required",
+        "withoutShipping": "without shipping cost",
+        "orderAlert": {
+            "header": "New Order 🔥",
+            "message": "you have a new order . check it now ",
+            "ok": "ok"
+        },
+        "loading": "loading...",
+        "back" : "Back"
+    },
+    "LOGIN": {
+        "login": "Login",
+        "message": "Login with your email"
+    },
+    "FORM": {
+        "call": "Call",
+        "name": "Name",
+        "phone": "Phone",
+        "email": "Email Address",
+        "password": "Password",
+        "filter": "Filter",
+        "code": "Code",
+        "discount": "Discount",
+        "validUntil": "ValidUntil",
+        "cancel": "cancel",
+        "confirm": "confirm",
+        "confirmed": "Confirmed",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "egMoney": "LE",
+        "newOrder": "you have got a new order",
+        "orderStatus": "order status",
+        "date": "date",
+        "search": "search",
+        "waiting": "waiting",
+        "ok": "ok",
+        "reset": "reset",
+        "orderCode" : "order no"
+    },
+    "TABS": {
+        "orders": "orders",
+        "profile": "profile",
+        "info": "Info",
+        "orderDetail": "Order Detail",
+        "products": "Products",
+        "controlPanel" : "Control Panel"
+    },
+    "PROFILE": {
+        "lang": "language",
+        "en": "English",
+        "ar": "Arabic",
+        "cancel": "cancel",
+        "logout": "log out"
+    }
+}

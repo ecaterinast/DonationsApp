@@ -1,0 +1,49 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+
+    <nb-card-header>
+        <button nbButton ghost  (click)="back()">
+            <nb-icon  icon="arrow-back-outline"></nb-icon>
+        </button>
+        
+        <span *ngIf="!isEditing">{{'FORM.newVariable' | translate}}</span>
+        <span *ngIf="isEditing">{{'FORM.editVariable' | translate}}</span>
+        
+    </nb-card-header>
+
+  <div class="p-3">
+
+ 
+        <div class="form-group">
+            <label> {{'FORM.key' | translate}} : </label>
+              <input type="text" nbInput fullWidth [placeholder]="'FORM.name' | translate"  [(ngModel)]="variable.key">
+
+            </div>
+       
+        <div class="form-group">
+            <label> {{'FORM.values' | translate}} : </label>
+                <div *ngFor="let value of variable.values;let j = index">
+                    <div class="value">
+                        <button nbButton ghost  status="danger" type="button" class="close-btn" *ngIf="j" (click)="deleteValue(j)">
+                            <nb-icon icon="close-circle-outline"></nb-icon>
+                        </button>
+
+                        <input type="text" nbInput fullWidth [placeholder]="'FORM.name' | translate" [(ngModel)]="value.name">
+
+                    </div>
+                </div>
+
+                <button type="button" nbButton hero status="info" (click)="newValue()">
+                    <nb-icon icon="plus-circle-outline"></nb-icon>
+                    {{'FORM.newValue' | translate}}
+                </button>
+        </div>
+       
+  </div>
+
+  <div class="center p-4">
+    <button type="button" nbButton hero status="success" (click)="save()">
+      <nb-icon icon="checkmark-circle-outline"></nb-icon>
+      {{'FORM.save' | translate}}
+  </button>
+  </div>
+</nb-card>

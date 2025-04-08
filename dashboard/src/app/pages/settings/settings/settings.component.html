@@ -1,0 +1,41 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+    {{'MENU.settings' | translate}}
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+      
+      <div class="row justify-content-center">
+       
+        <div class="col-sm-12 col-md-6">
+          <div class="form-group">
+            <label>{{'FORM.marketPolicy' | translate}} :</label>
+            <textarea fullWidth nbInput rows="5" [placeholder]="'FORM.marketPolicy' | translate"  formControlName="marketPolicy"></textarea>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-6">
+          <div class="form-group">
+            <label>{{'FORM.ordersPolicy' | translate}} :</label>
+            <textarea fullWidth nbInput rows="5" [placeholder]="'FORM.ordersPolicy' | translate"  formControlName="ordersPolicy"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="center">
+          <button type="submit" nbButton hero status="success" [disabled]="!form.valid">
+            <nb-icon icon="checkmark-circle-outline"></nb-icon>
+            {{'FORM.save' | translate}}
+          </button>
+      </div>
+
+    </form> 
+  </nb-card-body>
+  <nb-card-footer>
+    <a href="https://app-privacy-policy-generator.firebaseapp.com/" target="_blank">
+      <nb-icon icon="settings-outline"></nb-icon>
+     {{'FORM.policyGenerator' | translate}}
+    </a>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,72 @@
+ <ion-header mode="ios">
+  <ion-navbar color="white">
+
+    <ion-title>
+		{{'RATING.rating' | translate}}
+	</ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" [hidden]="ratings">
+		<ion-col col-1>
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col>
+	</ion-row>
+
+
+	<!-- rating section -->
+	<ion-row justify-content-center>
+		<ion-col col-12 col-sm-12 col-md-6>
+			<ion-card *ngIf="ratings && ratings.length != 0" class="animated fadeIn">
+				<ion-item no-lines>
+
+					<div class="center" *ngIf="meanRating">
+							<star-rating [value]="meanRating" size="24" readonly="true" 
+							checkedcolor="gold" uncheckedcolor= "gray" ></star-rating>
+					</div>
+
+					<h2 text-center>
+							{{'RATING.rating' | translate}}
+					</h2>
+
+					<p text-center>
+							{{'RATING.from' | translate}} {{ratings.length}} {{'RATING.customer' | translate}}
+					</p>
+				</ion-item>
+				<ion-card-content>
+					<ion-list no-lines>
+						<ng-container *ngFor="let rating of ratings">
+							
+							<ion-item [ngClass]="direction">
+								<ion-avatar item-start>
+									<img class="user-avatar" *ngIf="!rating.customer.facebookUserId" [src]="this.dataService.baseURL + 'containers/users/download/' + rating.customer.image" onerror="this.onerror=null;this.src='assets/imgs/avatar.png';">
+              						<img class="user-avatar" *ngIf="rating.customer.facebookUserId" [src]="rating.customer.image" onerror="this.onerror=null;this.src='assets/imgs/avatar.png';">
+								</ion-avatar>
+								<ion-label>
+									<h2 class="customer-name">{{rating.customer.name}}</h2>
+									<star-rating [value]="rating.rating" size="20" readonly="true" 
+									checkedcolor="gold" uncheckedcolor= "gray"></star-rating>
+								</ion-label>
+							</ion-item>	
+
+							<ion-item  class="border" [ngClass]="direction">
+								<p class="comment">{{rating.comment}}</p>
+								<ion-note>{{ rating.createdAt | date }}</ion-note>
+							</ion-item>
+
+						</ng-container>				
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+		</ion-col>
+	</ion-row>
+
+	<!-- empty section -->
+	<section class="empty-cart animated fadeIn" *ngIf="ratings && ratings.length == 0"> 
+			<img src="../../assets/imgs/leaves.png">
+	</section>
+</ion-content>

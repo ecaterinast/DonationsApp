@@ -1,0 +1,39 @@
+.form-group {
+    margin-bottom: 1.14rem;
+}
+
+
+
+.margin-top{
+    margin-top: 1.14rem;
+}   
+
+.margin-left{
+    margin-left: 1rem;
+}   
+
+
+
+
+.value{
+    position: relative;
+    margin-bottom: 1rem;
+
+    .close-btn{
+        position: absolute;
+        right: -1%;
+    }
+    
+    input{
+        padding: 0.4375rem 2.3rem !important;
+    }
+}
+
+
+
+
+.end{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -1,0 +1,23 @@
+page-about {
+   
+    a{
+        display: inline-block;
+        height: 5rem !important;
+        width: 5rem !important;
+        margin: 0 1rem !important;
+
+    }
+
+    .empty-search{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 18rem;
+        }
+    }
+
+    
+}

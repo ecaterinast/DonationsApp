@@ -1,0 +1,191 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+
+
+
+		<ion-title *ngIf="product">
+			{{product.name}}
+		</ion-title>
+
+
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="cart()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="cartNo">
+					{{cartNo}}
+				</ion-badge>
+				<ion-icon name="ios-cart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content class="bg">
+	<!-- product detail -->
+	<section *ngIf="product" class="detail">
+		<div class="center">
+			<ion-slides pager >
+				<ion-slide>
+					<img class="full" [src]=" dataService.baseURL + 'containers/images/download/'+product.image"
+					onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+				</ion-slide>
+				<ion-slide *ngFor="let g of product.gallery">
+					<img class="full" [src]=" dataService.baseURL + 'containers/images/download/'+ g"
+					onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+				</ion-slide>
+			</ion-slides>
+		</div>
+		<ion-item no-lines [ngClass]="direction">
+			<h2>
+				{{product.name}}
+			</h2>
+
+			<!-- add to favourites -->
+			<button ion-button clear icon-only item-end color="danger" (click)="addFavourite(product)"
+				*ngIf="!favourite">
+				<ion-icon name="heart-outline"></ion-icon>
+			</button>
+
+
+			<!-- remove from favourites -->
+			<button ion-button clear icon-only item-end color="danger" (click)="removeFavourite(product)"
+				*ngIf="favourite">
+				<ion-icon name="heart"></ion-icon>
+			</button>
+
+		</ion-item>
+
+		<ion-item no-lines class="rating" [ngClass]="direction">
+			<ion-badge color="secondary" (click)="rating()" *ngIf="productRating != undefined">
+				{{this.productRating}}
+				<ion-icon name="star"></ion-icon>
+			</ion-badge>
+			<p item-end>{{product.price}} {{'PROFILE.money' | translate}}</p>
+		</ion-item>
+
+		<!-- variables section-->
+		<ng-container *ngIf="product.variables.length != 0">
+			<p text-center class="form-error animated fadeIn" *ngIf="formError">{{'MESSAGES.variableForm' | translate}}
+			</p>
+			<ion-row>
+				<ion-col col-sm-6 col-md-4 *ngFor="let variable of product.variables">
+					<form [formGroup]="variablesForm">
+						<ion-item no-lines [ngClass]="direction">
+							<ion-label>
+								{{variable.key}}
+							</ion-label>
+							<ion-select [formControlName]="variable.key" [selectOptions]="selectOptions"
+								[okText]="'ORDER.ok' | translate" [cancelText]="'ORDER.cancel' | translate">
+
+								<ion-option *ngFor="let value of variable.values" [value]="value">
+									{{value.name}}
+									<span *ngIf="value.price">+ {{value.price}} {{'PROFILE.money' | translate}}</span>
+								</ion-option>
+							</ion-select>
+						</ion-item>
+					</form>
+				</ion-col>
+			</ion-row>
+		</ng-container>
+
+
+		<button ion-button block color="dark" class="btn" (click)="addToCart()">
+			{{'DETAIL.add' | translate}}
+		</button>
+
+	</section>
+
+	<!-- description section -->
+	<section class="detail" *ngIf="product">
+		<ion-item no-lines text-wrap [ngClass]="direction">
+			<h2>{{'DETAIL.desc' | translate}}</h2>
+			<p class="animated fadeIn desc">
+				{{product.description}}
+			</p>
+		</ion-item>
+	</section>
+
+
+	<!-- similar section -->
+
+	<section [ngClass]="direction">
+		<ion-item no-lines>
+			<h2 class="hdr">{{'DETAIL.similar' | translate}}</h2>
+			<button ion-button item-end clear color="primary" (click)="viewMore()">
+				{{'DETAIL.more' | translate}}
+			</button>
+		</ion-item>
+
+		<!-- loading spinner -->
+		<ion-row justify-content-center class="loading" *ngIf="loading">
+			<ion-col col-1>
+				<ion-spinner name="bubbles"></ion-spinner>
+			</ion-col>
+		</ion-row>
+
+
+
+		<div *ngIf="products" class="products">
+			<ion-card class="product animated fadeIn"
+				*ngFor="let prod of products;let i = index; trackBy : trackByFun;">
+
+				<!-- add to favourites -->
+				<button ion-button clear icon-only item-end color="danger" class="favourite"
+					(click)="addFavourite(prod , i)" *ngIf="!isFavourite(prod)">
+					<ion-icon name="heart-outline"></ion-icon>
+				</button>
+
+				<!-- remove from favourites -->
+				<button ion-button clear icon-only item-end color="danger" class="favourite"
+					(click)="removeFavourite(prod , i)" *ngIf="isFavourite(prod) || prod.favourite">
+					<ion-icon name="heart"></ion-icon>
+				</button>
+
+				<img [src]="dataService.baseURL +  'containers/images/download/'+prod.image"
+					onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';" (click)="detail(prod)">
+
+				<ion-card-content (click)="detail(prod)" [ngClass]="direction">
+					<ion-badge color="secondary">
+						{{calcRating(prod.ratings)}}
+						<ion-icon name="star"></ion-icon>
+					</ion-badge>
+					<ion-label>
+						{{prod.name}}
+					</ion-label>
+					<p>{{prod.price}} $</p>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</section>
+
+	<!-- empty section -->
+	<section class="empty-search animated fadeIn" *ngIf="products && products.length == 0 || ( !loading && !products)">
+		<img src="../../assets/imgs/leaves.png">
+	</section>
+
+
+	<!-- fab -->
+	<ion-fab right bottom>
+		<button ion-fab color="dark">
+			<ion-icon name="share"></ion-icon>
+		</button>
+		<ion-fab-list side="top">
+			<button ion-fab (click)="shareVia('facebook')">
+				<ion-icon name="logo-facebook"></ion-icon>
+			</button>
+			<button ion-fab (click)="shareVia('twitter')">
+				<ion-icon name="logo-twitter"></ion-icon>
+			</button>
+			<button ion-fab (click)="shareVia('whatsapp')">
+				<ion-icon name="logo-whatsapp"></ion-icon>
+			</button>
+			<button ion-fab (click)="shareVia('instagram')">
+				<ion-icon name="logo-instagram"></ion-icon>
+			</button>
+		</ion-fab-list>
+	</ion-fab>
+
+</ion-content>

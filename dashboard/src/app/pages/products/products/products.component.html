@@ -1,0 +1,15 @@
+
+<nb-card>
+  <nb-card-header>
+   {{'MENU.products' | translate}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" 
+    (edit)="edit($event)"
+    (create)="add($event)"
+    (delete)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+

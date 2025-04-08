@@ -1,0 +1,55 @@
+
+
+<div class="end p-4">
+  <button nbButton outline (click)="enableFilter()">
+    <nb-icon icon="funnel-outline"></nb-icon>
+    {{'FORM.filter' | translate}}
+  </button>
+</div>
+
+
+<nb-card *ngIf="filter" class="filter mb-4">
+  <nb-card-body>
+    <div class="row justify-contnet-center">
+      <div class="col-sm-12 col-md-6 p-2">
+        <label>{{'FORM.orderStatus' | translate}} :</label>
+        <nb-select fullWidth [placeholder]="'FORM.orderStatus' | translate" [(ngModel)]="orderStatus">
+          <nb-option [value]="status.waiting">{{'FORM.waiting' | translate}}</nb-option>
+          <nb-option [value]="status.confirmed">{{'FORM.confirmed' | translate}}</nb-option>
+          <nb-option [value]="status.completed">{{'FORM.completed' | translate}}</nb-option>
+          <nb-option [value]="status.cancelled">{{'FORM.cancelled' | translate}}</nb-option>
+        </nb-select>
+      </div>
+
+      <div class="col p-2">
+        <label>{{'FORM.date' | translate}} :</label>
+        <input fullWidth nbInput [placeholder]="'FORM.date' | translate" [nbDatepicker]="datepicker" [(ngModel)]="date">
+        <nb-datepicker #datepicker></nb-datepicker>
+      </div>
+    </div>
+
+    <div class="center p-3">
+      <button nbButton status="success" hero (click)="search()" >
+        <nb-icon icon="search"></nb-icon>
+        {{'FORM.search' | translate}}
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+   {{'MENU.orders' | translate}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="detail($event)" >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+
+
+
+

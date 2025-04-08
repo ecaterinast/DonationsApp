@@ -1,0 +1,100 @@
+page-profile {
+
+	.item-inner{
+		margin-left: unset !important;
+	}
+	.customer{
+		img {
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+		}
+		
+	}
+
+	.index{
+		height: 5rem;
+		width: 5rem;
+		color: #ccc;
+		font-size: 2rem;
+		border: 1px solid #ccc;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+    	align-items: center;
+	}
+
+	ion-chip{
+		padding : 0 10px;
+		display: block;
+	}
+
+
+
+	button {
+		text-transform: capitalize !important;
+		ion-badge {
+			position: absolute;
+			top: -0.5rem;
+    		right: -0.7rem;
+		    border-radius: 50% !important;
+
+			& ~ ion-icon {
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+		}
+	}
+
+	.segment-button.segment-activated {
+		border-color: #fff !important;
+	    color: #fff;
+	}
+
+
+	.segment-button{
+		color: #fff !important;
+		text-transform: capitalize !important;
+	}
+
+	.toolbar-custom.toolbar-md-primary .toolbar-background-md ,
+	 .toolbar-custom.toolbar-ios-primary .toolbar-background-ios {
+	    background: #343434c2  !important;
+	}
+
+
+
+	.holder{
+		height: 13.6rem;
+	}
+	
+
+	.no-shadow{
+		box-shadow: unset !important
+	}
+
+	.icon-btn{
+		width: 3rem !important;
+		height: 3rem !important;
+		border-radius: 50%;
+	}
+
+	.white{
+		color: white;
+	}
+
+	
+	.empty-orders{
+        height: 65vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 18rem;
+        }
+	}
+
+
+	
+}

@@ -1,0 +1,164 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+    <ion-title>
+		{{'ORDER.confirm' | translate}}
+	</ion-title>
+
+    <ion-buttons right>
+    	<button ion-button clear icon-only (click)="dismiss()">
+    		<ion-icon name="close"></ion-icon>
+    	</button>
+    </ion-buttons>
+    
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+	
+	<!-- stepper -->
+	<ion-stepper #stepper *ngIf="customer">
+
+		<!-- address -->
+      <ion-step [label]="'ORDER.stepper.first.title' | translate"
+                [description]="'ORDER.stepper.first.desc' | translate"
+                icon="pin">
+        <ion-row>
+        	<ion-col col-12 col-sm-12 col-md-9 col-lg-8>
+        		<ion-card>
+	  		
+			  		<ion-card-header class="address">
+		  	   			<ion-item class="transparent">
+		  	   				<p>{{'PROFILE.address' | translate}}</p>
+								 
+							<button ion-button item-end clear (click)="changeAddress()" *ngIf="address">
+									{{'PROFILE.change' | translate}}
+								<ion-icon class="margin-left" name="ios-arrow-forward"></ion-icon>
+							</button>
+
+
+							<button ion-button item-end clear (click)="newAddress()" *ngIf="!address">
+									{{'PROFILE.newAddress' | translate}}
+								<ion-icon class="margin-left" name="add"></ion-icon>
+							</button>
+
+		  	   			</ion-item>		  	   		
+			  	 	</ion-card-header>
+			  	 
+					<ion-card-content>
+						<ion-list text-wrap no-lines>
+							<ion-item class="margin-top" >
+								<ion-icon item-start class="pin" name="pin"></ion-icon>
+								<p class="animated fadeIn">{{address}}</p>
+							</ion-item>
+						</ion-list>
+					</ion-card-content>
+			  		
+			  	</ion-card>
+        	</ion-col>
+        </ion-row>        
+            
+        
+
+        <button ion-button small ionicStepperNext color="dark" class="btn" [disabled]="!address">	
+			{{'ORDER.stepper.next' | translate}}		
+		</button>
+	  </ion-step>
+	  
+
+
+	  <!-- shipping zone -->
+		<ion-step [label]="'ORDER.stepper.second.title' | translate"
+					[description]="'ORDER.stepper.second.desc' | translate"
+					icon="car">
+			<ion-row>
+				<ion-col col-12 col-sm-12 col-md-9 col-lg-8>
+					<ion-card>
+						<ion-item no-lines [ngClass]="direction">
+							<ion-label>{{'ORDER.stepper.second.title' | translate}}</ion-label>
+							<ion-select [(ngModel)]="zone" [selectOptions]="selectOptions" 
+										[okText]="'ORDER.ok' | translate" [cancelText]="'ORDER.cancel' | translate">
+								<ion-option *ngFor="let zone of zones" [value]="zone">
+									{{zone.name}}
+								</ion-option>
+								<ion-option value="other">
+									{{'ORDER.stepper.second.other' | translate}}
+								</ion-option>
+							</ion-select>
+						</ion-item>		  	   		
+					</ion-card>
+				</ion-col>
+			</ion-row>        
+				
+			
+			<button ion-button small ionicStepperPrevious  color="light"  class="btn">{{'ORDER.stepper.previous' | translate}}</button>
+			<button ion-button small color="dark" class="btn" [disabled]="!zone" ionicStepperNext>	
+				{{'ORDER.stepper.next' | translate}}		
+			</button>
+		</ion-step>
+
+		<!-- copouns -->		
+			<ion-step [label]="'ORDER.stepper.third.title' | translate"
+						[description]="'ORDER.stepper.third.desc' | translate"
+						icon="card">
+				<ion-row>
+					<ion-col col-12 col-sm-12 col-md-9 col-lg-8>
+						<ion-card>
+					
+							<ion-item no-lines mode="ios"  [ngClass]="direction">
+								<ion-label item-start>{{'ORDER.copoun' | translate}}</ion-label>
+								<ion-input type="text" [(ngModel)]="code"></ion-input>
+							</ion-item>
+						</ion-card>
+					</ion-col>
+				</ion-row>        
+					
+				
+				<button ion-button small ionicStepperPrevious  color="light"  class="btn">{{'ORDER.stepper.previous' | translate}}</button>
+				<button ion-button small  color="dark" class="btn" (click)="verifyCopoun(stepper)">	
+					{{'ORDER.stepper.next' | translate}}		
+				</button>
+			</ion-step>
+
+      <ion-step [label]="'ORDER.stepper.fourth.title' | translate"
+	  			[description]="'ORDER.stepper.fourth.desc' | translate"
+                icon="cash">
+
+        <ion-row>
+        	<ion-col col-12 col-sm-12 col-md-9 col-lg-8>
+        		<ion-card>
+					
+					<ion-item no-lines [ngClass]="direction">
+        				<h2>{{'ORDER.beforeDiscount' | translate}}</h2>
+        				<strong>{{beforeDiscount}} {{'PROFILE.money' | translate}}</strong>
+					</ion-item>
+
+					<ion-item no-lines [ngClass]="direction">
+        				<h2>{{'ORDER.discount' | translate}}</h2>
+        				<strong>{{discount}} %</strong>
+					</ion-item>
+
+					<ion-item no-lines [ngClass]="direction">
+        				<h2>{{'ORDER.afterDiscount' | translate}}</h2>
+        				<strong>{{afterDiscount}} {{'PROFILE.money' | translate}}</strong>
+					</ion-item>
+
+					<ion-item no-lines [ngClass]="direction">
+        				<h2>{{'ORDER.deliveryCost' | translate}}</h2>
+						<strong *ngIf="zone && zone != 'other'">{{zone.cost}} {{'PROFILE.money' | translate}}</strong>
+        				<strong *ngIf="zone == 'other'" text-wrap>{{'ORDER.contact' | translate}}</strong>
+					</ion-item>
+					
+
+        			<ion-item no-lines [ngClass]="direction">
+        				<h2>{{'ORDER.total' | translate}}</h2>
+        				<strong>{{total}} {{'PROFILE.money' | translate}}</strong>
+        			</ion-item>
+        		</ion-card>
+        	</ion-col>
+        </ion-row> 
+		   
+		<button ion-button color="light"  class="btn" small ionicStepperPrevious>{{'ORDER.stepper.previous' | translate}}</button>
+       	<button ion-button color="dark" class="btn" small (click)="order()">{{'ORDER.order' | translate}}</button>
+      </ion-step>
+    </ion-stepper>
+</ion-content>

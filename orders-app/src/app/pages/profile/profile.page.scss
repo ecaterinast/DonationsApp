@@ -1,0 +1,35 @@
+.banner{
+    height: 16rem;
+    background: url('../../../assets/images/market.jpg');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .image{
+        height: 6rem;
+        width: 6rem;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        background: url('../../../assets/images/logo.jpg');
+        background-position: center;
+        background-size: cover;
+        background-color: white;
+        box-shadow: 0pt 5pt 15pt rgba(0.212 , 0.212 , 0.212 , 0.3);
+    }
+
+
+}
+
+.center{
+   display: flex;
+   justify-content: center; 
+}
+
+ion-button{
+    margin-top: 2rem;
+}
+
+

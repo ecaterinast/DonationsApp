@@ -1,0 +1,66 @@
+<ion-header mode="ios">
+  <ion-navbar color="white">
+
+	<ion-buttons left>
+		<button ion-button clear icon-only menuToggle>
+			<ion-icon name="ios-menu-outline"></ion-icon>
+		</button>
+	</ion-buttons>
+
+
+	  <ion-title>
+		  {{'MENU.search' | translate}}
+	  </ion-title>
+  </ion-navbar>
+  <ion-toolbar color="white">
+		<ion-searchbar mode="ios" #searchBar [placeholder]="'MENU.search' | translate"  (ionInput)="onInput($event)"></ion-searchbar>
+	<ion-buttons right>
+		<button ion-button  icon-only class="search-btn" (click)="search()">
+			<ion-icon name="search"></ion-icon>
+		</button>
+	</ion-buttons>	
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading">
+		<ion-col col-1> 
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col> 
+	</ion-row>
+
+	<!-- products section -->
+	<ion-row  *ngIf="products && products.length != 0"  [hidden]="loading" justify-content-center>
+		<ion-col  col-12 col-sm-12 col-md-6 col-lg-4  *ngFor="let product of products; trackBy : trackByFn">
+			<ion-card>
+				<ion-item no-lines class="animated fadeIn" (click)="detail(product)" [ngClass]="direction">
+					<ion-avatar item-start>
+						<img class="product-avtar" [src]="dataService.baseURL + 'containers/images/download/'+product.image" onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+					</ion-avatar>
+					<h2>
+						{{product.name}}
+					</h2>
+					<p>
+						{{product.description}}
+					</p>
+				</ion-item>
+			</ion-card>
+		</ion-col>
+	</ion-row>
+
+	<!-- empty section -->
+	<section class="empty-search animated fadeIn" *ngIf="products && products.length == 0 && !loading"> 
+			<img src="../../assets/imgs/empty_search.png">
+	</section>
+
+
+	<!--infinite scroll -->
+	<div  *ngIf="products">
+		<ion-infinite-scroll *ngIf="products.length != 0" (ionInfinite)="getMore($event)">
+			<ion-infinite-scroll-content></ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+
+</ion-content>

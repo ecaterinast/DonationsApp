@@ -1,0 +1,122 @@
+<ion-split-pane>
+  <ion-menu type="overlay" [content]="content" (ionOpen)="getLang()">
+    <ion-header mode="ios">
+
+      <div class="top-header">
+        <ion-item no-lines class="transparent" menuClose *ngIf="!user">
+          <ion-avatar item-start>
+            <img class="user-avatar" src="../../assets/imgs/logo.jpg">
+          </ion-avatar>
+          <h2>{{market.name}}</h2>
+          <p>{{'MENU.welcome' | translate}}</p>
+        </ion-item>
+
+        <ion-item no-lines text-wrap class="transparent" *ngIf="user">
+          <ion-avatar item-start>
+            <img class="user-avatar" *ngIf="!user.facebookUserId"
+              [src]="this.dataService.baseURL + 'containers/users/download/' + user.image"
+              onerror="this.onerror=null;this.src='assets/imgs/avatar.png';">
+            <img class="user-avatar" *ngIf="user.facebookUserId" [src]="user.image"
+              onerror="this.onerror=null;this.src='assets/imgs/avatar.png';">
+          </ion-avatar>
+          <h2>{{user.name}}</h2>
+          <p>{{user.phone}}</p>
+        </ion-item>
+
+      </div>
+
+    </ion-header>
+
+    <ion-content class="transparent">
+
+      <ion-list no-lines>
+
+        <button menuClose ion-item class="menu_btn" *ngIf="!user" (click)="openPage('LoginPage')">
+          <ion-icon name="log-in" item-start></ion-icon>
+          {{'FORM.login' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" *ngIf="user" (click)="openPage('ProfilePage')">
+          <ion-icon name="person" item-start></ion-icon>
+          {{'MENU.account' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('HomePage')">
+          <ion-icon name="home" item-start></ion-icon>
+          {{'MENU.home' | translate}}
+        </button>
+
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('CategoriesPage')">
+          <ion-icon name="apps" item-start></ion-icon>
+          {{'MENU.categories' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('BrandsPage')">
+          <ion-icon name="pricetag" item-start></ion-icon>
+          {{'MENU.brands' | translate}}
+        </button>
+
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('OffersPage')">
+          <ion-icon name="md-flame" item-start></ion-icon>
+          {{'MENU.offers' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('SearchPage')">
+          <ion-icon name="search" item-start></ion-icon>
+          {{'MENU.search' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('FavouritesPage')">
+          <ion-icon name="heart-outline" item-start></ion-icon>
+          {{'MENU.wishlist' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="share()">
+          <ion-icon name="share" item-start></ion-icon>
+          {{'MENU.share' | translate}}
+        </button>
+
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('AboutPage')">
+          <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
+          {{'MENU.about' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('PrivacyPolicyPage')">
+          <ion-icon name="md-clipboard" item-start></ion-icon>
+          {{'MENU.privacy' | translate}}
+        </button>
+
+        <button menuClose ion-item class="menu_btn" (click)="openPage('TermsPage')">
+          <ion-icon name="md-create" item-start></ion-icon>
+          {{'MENU.terms' | translate}}
+        </button>
+
+
+
+        <button menuClose ion-item class="menu_btn" *ngIf="user" (click)="logout()">
+          <ion-icon name="log-out" item-start></ion-icon>
+          {{'MENU.logout' | translate}}
+        </button>
+
+      </ion-list>
+
+    </ion-content>
+
+    <ion-footer class="transparent" mode="ios">
+      <ion-item no-lines class="menu_btn">
+        <ion-label *ngIf="lang == 'en'">{{'LANG.en' | translate}}</ion-label>
+        <ion-label *ngIf="lang == 'ar'">{{'LANG.ar' | translate}}</ion-label>
+        <button ion-button clear icon-only item-end (click)="chooseLang($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-footer>
+
+  </ion-menu>
+
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>

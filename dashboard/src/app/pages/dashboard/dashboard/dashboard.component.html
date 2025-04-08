@@ -1,0 +1,204 @@
+<!-- alerts -->
+
+<div class="bg">
+
+  <div class="header mb-4">
+    <h2 class="title">
+      {{'MENU.dashboard' | translate}}
+    </h2>
+    <p class="date">
+      {{currentDate | date:'EEEE dd/MM/yyyy'}}
+    </p>
+  </div>
+
+
+  <div class="reports">
+    <div class="row">
+      <div class="col-sm-12 col-md-9">
+        <!-- orders -->
+        <div>
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/all-orders.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.waitingOrders' | translate}}
+                  </p>
+                  <p class="count">
+                    <ng-container *ngIf="waitingOrders">
+                      {{waitingOrders}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/confirm-orders.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.completedOrders' | translate}}
+                  </p>
+                  <p class="count">
+
+                    <ng-container *ngIf="completedOrders">
+                      {{completedOrders}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/cancelled-orders.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.cancelledOrders' | translate}}
+                  </p>
+                  <p class="count">
+
+                    <ng-container *ngIf="cancelledOrders">
+                      {{cancelledOrders}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div>
+          <!-- credit -->
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/all-credit.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.allCredit' | translate}}
+                  </p>
+                  <p class="count">
+                    <ng-container *ngIf="allCredit">
+                      {{allCredit}} {{'FORM.egMoney' | translate}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/in-credit.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.inCredit' | translate}}
+                  </p>
+                  <p class="count">
+
+                    <ng-container *ngIf="inCredit">
+                      {{inCredit}} {{'FORM.egMoney' | translate}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-4">
+              <div class="report">
+                <div class="icon">
+                  <img src="assets/images/out-credit.png">
+                </div>
+                <div class="details">
+                  <p class="title">
+                    {{'MENU.outCredit' | translate}}
+                  </p>
+                  <p class="count">
+
+                    <ng-container *ngIf="outCredit">
+                      {{outCredit}} {{'FORM.egMoney' | translate}}
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col">
+        <div class="product">
+          <img src="assets/images/product.png">
+          <p class="title">
+            {{'MENU.products' | translate}}
+          </p>
+          <p class="count" *ngIf="products">
+            <span>
+              {{products}}
+            </span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="mt-4">
+
+  <div class="header mb-4">
+    <h2 class="title">
+      {{'MENU.alerts' | translate}}
+    </h2>
+  </div>
+
+  
+
+  <nb-card class="stock-alert" *ngFor="let stock of stocks; let i = index">
+    <nb-card-body>
+      <div class="d-inline-block p-1">
+
+        <button nbButton ghost status="dark" (click)="deleteStock(i)">
+          <nb-icon icon="trash-outline"></nb-icon>
+        </button>
+
+
+        <button nbButton ghost status="dark" (click)="productDetails(stock.product)">
+          <nb-icon icon="info-outline"></nb-icon>
+        </button>
+
+        <button nbButton ghost status="dark" (click)="deleteStockAlert(i)">
+          <nb-icon icon="close"></nb-icon>
+        </button>
+      </div>
+
+      <div class="d-inline-block p-1">
+        <strong>{{stock.product.name}} <span *ngIf="stock.name != 'all'">({{stock.name}})</span> </strong>
+        {{'STOCK.msg' | translate}} <strong>{{stock.stock}}</strong> {{'STOCK.from' | translate}} .
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+
+</section>

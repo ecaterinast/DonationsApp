@@ -1,0 +1,31 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+    {{'MENU.ads' | translate}}
+    <div class="d-inline-block">
+      <button nbButton ghost status="primary" (click)="add()">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <div class="row p-4">
+    <div class="col-sm-12 col-md-4 col-lg-3 mt-4" *ngFor="let ad of ads">
+      <nb-card>
+        <img [src]="this.dataService.baseURL + 'containers/images/download/' + ad.imageURL" alt="">
+        <h6 class="mt-2 text-center">
+          <span *ngIf="ad.product">{{ad.product.name}}</span>
+          <span *ngIf="ad.category">{{ad.category.name}}</span>
+          <span *ngIf="ad.brand">{{ad.brand.name}}</span>
+        </h6>
+        <div class="center pb-2">
+          <button nbButton class="m-1" ghost status="success" (click)="edit(ad)">
+            <nb-icon icon="edit"></nb-icon>
+          </button>
+          <button nbButton class="m-1" ghost status="danger" (click)="delete(ad)">
+            <nb-icon icon="trash"></nb-icon>
+          </button>
+        </div>
+      </nb-card>
+    </div>
+  </div>
+</nb-card>

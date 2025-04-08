@@ -1,0 +1,134 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin"
+    ]
+  },
+  "User": {
+    "dataSource": "market",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "ACL": {
+    "dataSource": "market",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "market",
+    "public": true,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "market",
+    "public": false
+  },
+  "category": {
+    "dataSource": "market",
+    "public": true
+  },
+  "subcategory": {
+    "dataSource": "market",
+    "public": true
+  },
+  "order": {
+    "dataSource": "market",
+    "public": true
+  },
+  "product": {
+    "dataSource": "market",
+    "public": true
+  },
+  "rating": {
+    "dataSource": "market",
+    "public": true
+  },
+  "customer": {
+    "dataSource": "market",
+    "public": true
+  },
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "emailDs"
+  },
+  "user": {
+    "dataSource": "market",
+    "public": true
+  },
+  "shipping": {
+    "dataSource": "market",
+    "public": true
+  },
+  "copoun": {
+    "dataSource": "market",
+    "public": true
+  },
+  "slider": {
+    "dataSource": "market",
+    "public": true
+  },
+  "banner": {
+    "dataSource": "market",
+    "public": true
+  },
+  "homeCategories": {
+    "dataSource": "market",
+    "public": true
+  },
+  "notifications": {
+    "dataSource": null,
+    "public": true
+  },
+  "contact": {
+    "dataSource": "market",
+    "public": true
+  },
+  "variable": {
+    "dataSource": "market",
+    "public": true
+  },
+  "stock": {
+    "dataSource": "market",
+    "public": true
+  },
+  "policy": {
+    "dataSource": "market",
+    "public": true
+  },
+  "brand": {
+    "dataSource": "market",
+    "public": true
+  },
+  "ad": {
+    "dataSource": "market",
+    "public": true
+  },
+  "counters": {
+    "dataSource": "market",
+    "public": true
+  }
+}

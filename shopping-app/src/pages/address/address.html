@@ -1,0 +1,65 @@
+
+<ion-header mode="ios">
+  <ion-navbar color="white">
+    <ion-title>
+      <span *ngIf="!isEditing">{{'PROFILE.newAddress' | translate}}</span>
+      <span *ngIf="isEditing">{{'PROFILE.editAddress' | translate}}</span>
+    </ion-title>
+
+    <ion-buttons right>
+        <button ion-button clear icon-only (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="saveAddress()">
+          <ion-item no-lines mode="ios"  [ngClass]="direction">
+              <ion-label>{{'PROFILE.country' | translate}}</ion-label>
+              <ion-input type="text" formControlName="country"></ion-input>
+            </ion-item>
+      
+            <ion-item no-lines mode="ios"  [ngClass]="direction">
+              <ion-label>{{'PROFILE.state' | translate}}</ion-label>
+              <ion-input type="text" formControlName="state"></ion-input>
+            </ion-item>
+      
+            <ion-item no-lines mode="ios"  [ngClass]="direction">
+              <ion-label>{{'PROFILE.city' | translate}}</ion-label>
+              <ion-input type="text" formControlName="city"></ion-input>
+            </ion-item>
+      
+            <ion-item no-lines mode="ios"  [ngClass]="direction">
+              <ion-label>{{'PROFILE.address' | translate}}</ion-label>
+              <ion-input type="text" formControlName="details"></ion-input>
+            </ion-item>
+            
+            <ion-item no-lines mode="ios" [ngClass]="direction">
+              <ion-label>{{'PROFILE.pincode' | translate}}</ion-label>
+              <ion-input type="number" formControlName="pincode"></ion-input>
+            </ion-item>
+      
+      
+            <ion-item no-lines mode="ios" [ngClass]="direction">
+              <ion-label text-wrap>
+              {{'PROFILE.default' | translate}}
+              </ion-label>
+              <ion-toggle formControlName="default"></ion-toggle>
+            </ion-item>
+
+            <button ion-button block round  margin-top class="no-shadow" type="submit" [disabled] = "!form.valid">
+                {{'PROFILE.save' | translate}}
+            </button>
+
+      </form>
+     
+    </ion-card-content>
+	  	
+	</ion-card>
+
+</ion-content>

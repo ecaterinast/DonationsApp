@@ -1,0 +1,48 @@
+
+<ion-content class="ion-padding" [ngClass]="direction">
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeSm="12" sizeMd="8">
+
+        <h1>{{'LOGIN.login' | translate}}</h1>
+        <p>{{'LOGIN.message' | translate}}</p>
+
+        <div class="form">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+           
+            <ion-item>
+              <ion-icon class="icon" name="mail" slot="start"></ion-icon>
+              <ion-input formControlName="email" placeholder="email" type="email"></ion-input>
+            </ion-item>
+
+            <ion-item class="animated fadeIn" *ngIf="notValid('email') || showFormErrors" lines="none">
+              <ion-text color="danger" class="form-error">
+                {{'MESSAGES.validEmail' | translate}}
+              </ion-text>
+            </ion-item>
+            
+            <ion-item>
+              <ion-icon class="icon" name="lock-closed" slot="start"></ion-icon>
+              <ion-input formControlName="password" placeholder="password" type="password"></ion-input>
+            </ion-item>
+
+            <ion-item class="animated fadeIn" *ngIf="notValid('password') || showFormErrors" lines="none">
+              <ion-text color="danger" class="form-error">
+                {{'MESSAGES.required' | translate}}
+              </ion-text>
+            </ion-item>
+
+            <ion-button type="submit" shape="round" expand="block" >
+              {{'LOGIN.login' | translate}}
+            </ion-button>
+            
+          </form>
+         
+        </div>
+  
+      </ion-col>
+    </ion-row>
+  
+</ion-content>
+
+

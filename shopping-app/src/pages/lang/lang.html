@@ -1,0 +1,14 @@
+
+<ion-content>
+
+  <ion-item *ngFor="let lang of languages" (click)="choose(lang.code)">
+    <ion-avatar item-start>
+      <img [src]="'assets/imgs/' + lang.code + '.png'">
+    </ion-avatar>
+    <ion-label>
+      {{'LANG.' + lang.code | translate}}
+    </ion-label>
+  </ion-item>
+
+
+</ion-content>

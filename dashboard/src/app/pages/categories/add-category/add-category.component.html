@@ -1,0 +1,31 @@
+
+
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+    <nb-card-header>
+      {{'FORM.newCategory' | translate}}
+    </nb-card-header>
+    <nb-card-body>
+
+      <p *ngIf="file" class=" mb-2">{{file.name}}</p>
+
+      <div class="form-group">
+          <div class="custom-file">
+            <input type="file"  class="custom-file-input" id="customFile" (change)="onImageSelect($event)">
+            <label class="custom-file-label" for="customFile">{{'FORM.chooseFile' | translate}}</label>
+          </div>
+      </div>
+        
+      <form  [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input type="text" nbInput fullWidth [placeholder]="'FORM.name' | translate" formControlName="name">
+        </div>
+        
+        <div class="center">
+            <button type="submit" nbButton hero status="success" [disabled]="!form.valid || !file">
+                <nb-icon icon="checkmark-circle-outline"></nb-icon>
+              {{'FORM.save' | translate}}
+            </button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

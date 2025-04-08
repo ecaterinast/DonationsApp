@@ -1,0 +1,43 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "storage",
+    "nameConflict": "makeUnique"
+  },
+  "market": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/DB",
+    "database": "DB",
+    "password": "",
+    "name": "market",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.host.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "supportURL@email.com",
+          "pass": "supportURL"
+        }
+      }
+    ]
+  }
+}

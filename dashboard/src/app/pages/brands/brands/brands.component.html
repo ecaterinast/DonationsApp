@@ -1,0 +1,25 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger">
+  <nb-card-header>
+      {{'MENU.brands' | translate}}
+    <div class="d-inline-block">
+      <button nbButton  ghost  status="primary" (click)="add()"><nb-icon icon="plus-circle-outline"></nb-icon></button>
+    </div>
+  </nb-card-header>
+
+  <div class="row  p-4">
+    <div class="col-sm-12 col-md-4 col-lg-3 mt-4" *ngFor="let brand of brands">
+      <nb-card>
+          <div class="center">
+              <nb-user class="mt-4" [size]="'giant'" [onlyPicture]="true" [size]="'giant'" [picture]="this.dataService.baseURL + 'containers/images/download/' + brand.image"></nb-user>
+          </div>
+          <h6 class="mt-2 text-center">
+              {{brand.name}}
+          </h6>
+          <div class="center pb-2">
+            <button nbButton class="m-1" ghost  status="success" (click)="edit(brand)"><nb-icon icon="edit"></nb-icon></button>
+            <button nbButton class="m-1" ghost   status="danger" (click)="delete(brand)"><nb-icon icon="trash"></nb-icon></button>  
+          </div>
+      </nb-card>
+    </div>
+  </div>
+</nb-card>

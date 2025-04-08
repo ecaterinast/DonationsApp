@@ -1,0 +1,194 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+		<ion-buttons left>
+			<button ion-button clear icon-only menuToggle>
+				<ion-icon name="ios-menu-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+		<ion-title>
+			<div class="center">
+				<img class="navbar-logo" src="assets/imgs/logo.png">
+			</div>
+		</ion-title>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="favourites()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="favouritesNo">
+					{{favouritesNo}}
+				</ion-badge>
+				<ion-icon name="ios-heart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="cart()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="cartNo">
+					{{cartNo}}
+				</ion-badge>
+				<ion-icon name="ios-cart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	<!--refresher-->
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+	<!-- loading spinner -->
+	<ion-row justify-content-center class="loading" *ngIf="loading" [hidden]="homeCategories || refresher">
+		<ion-col col-1>
+			<ion-spinner name="bubbles"></ion-spinner>
+		</ion-col>
+	</ion-row>
+
+
+	<!-- home content -->
+	<ng-container *ngIf="sliders && banners && featuredProducts && homeCategories && categories">
+		<!--categories-->
+		<div class="center" [ngClass]="direction">
+			<div *ngIf="categories" class="categories">
+				<div class="category" *ngFor="let cat of categories" (click)="openCategory(cat.id)">
+					<div class="center" class="category-image">
+						<img [src]="dataService.baseURL + 'containers/images/download/'+cat.image"
+							onerror="this.onerror=null;this.src='assets/imgs/cart.jpg';">
+					</div>
+
+					<p text-center text-nowrap text-uppercase>
+						{{cat.name}}
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!--slider-->
+		<ion-slides pager  class="animated fadeIn" slidesPerView="1.2"
+		[initialSlide] = "sliders.length ? 1 : 0"
+			centeredSlides="true" spaceBetween="10" *ngIf="sliders.length != 0">
+			<ion-slide *ngFor="let slider of sliders" (click)="adDetail(slider)">
+				<img [src]="dataService.baseURL + 'containers/images/download/'+slider.imageURL"
+					onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+			</ion-slide>
+		</ion-slides>
+
+		<!-- Banners -->
+		<section class="banners">
+			<ion-row class="animated fadeIn">
+				<ion-col col-6 *ngFor="let banner of banners" (click)="adDetail(banner)">
+					<img [src]="dataService.baseURL + 'containers/images/download/'+banner.imageURL"
+						onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+				</ion-col>
+			</ion-row>
+		</section>
+
+		<!-- featured Products -->
+		<section *ngIf="featuredProducts.length">
+			<ion-item no-lines [ngClass]="direction">
+				<h2 class="hdr">
+					{{'MENU.featured' | translate}}
+				</h2>
+			</ion-item>
+
+			<div class="homeCategories" [ngClass]="direction">
+				<ion-card class="product" *ngFor="let prod of featuredProducts;let i = index">
+
+					<!-- add to favourites -->
+					<button ion-button clear icon-only item-end color="danger" class="favourite"
+						(click)="addFavourite(prod , i)" *ngIf="!isFavourite(prod)">
+						<ion-icon name="heart-outline"></ion-icon>
+					</button>
+
+					<!-- remove from favourites -->
+					<button ion-button clear icon-only item-end color="danger" class="favourite"
+						(click)="removeFavourite(prod , i)" *ngIf="isFavourite(prod) || prod.favourite">
+						<ion-icon name="heart"></ion-icon>
+					</button>
+
+					<!-- discount -->
+					<div class="discount" *ngIf="prod.discount">
+						{{prod.discount}} %
+					</div>
+
+					<!-- discount -->
+					<div class="discount" *ngIf="prod.discount">
+						{{prod.discount}} %
+					</div>
+
+					<img [src]="dataService.baseURL + 'containers/images/download/'+prod.image"
+						onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';" (click)="detail(prod)">
+
+					<ion-card-content (click)="detail(prod)" [ngClass]="direction">
+						<ion-badge color="secondary">
+							{{calcRating(prod.ratings)}}
+							<ion-icon name="star"></ion-icon>
+						</ion-badge>
+						<ion-label>
+							{{prod.name}}
+						</ion-label>
+						<p>{{prod.price}} {{'PROFILE.money' | translate}}</p>
+					</ion-card-content>
+				</ion-card>
+			</div>
+		</section>
+		<!-- home categories -->
+		<section>
+			<ng-container *ngFor="let doc of homeCategories">
+				<ion-item no-lines [ngClass]="direction">
+					<h2 class="hdr">
+						{{doc.categories.name}}
+					</h2>
+
+					<button class="more" ion-button item-end clear color="primary"
+						(click)="openCategory(doc.categoryId)">
+						{{'DETAIL.more' | translate}}
+					</button>
+				</ion-item>
+
+				<div class="homeCategories" [ngClass]="direction">
+					<ion-card class="product" *ngFor="let prod of doc.products;let i = index">
+
+						<!-- add to favourites -->
+						<button ion-button clear icon-only item-end color="danger" class="favourite"
+							(click)="addFavourite(prod , i)" *ngIf="!isFavourite(prod)">
+							<ion-icon name="heart-outline"></ion-icon>
+						</button>
+
+						<!-- remove from favourites -->
+						<button ion-button clear icon-only item-end color="danger" class="favourite"
+							(click)="removeFavourite(prod , i)" *ngIf="isFavourite(prod) || prod.favourite">
+							<ion-icon name="heart"></ion-icon>
+						</button>
+
+						<!-- discount -->
+						<div class="discount" *ngIf="prod.discount">
+							{{prod.discount}} %
+						</div>
+
+						<!-- discount -->
+						<div class="discount" *ngIf="prod.discount">
+							{{prod.discount}} %
+						</div>
+
+						<img [src]="dataService.baseURL + 'containers/images/download/'+prod.image"
+							onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';" (click)="detail(prod)">
+
+						<ion-card-content (click)="detail(prod)" [ngClass]="direction">
+							<ion-badge color="secondary">
+								{{calcRating(prod.ratings)}}
+								<ion-icon name="star"></ion-icon>
+							</ion-badge>
+							<ion-label>
+								{{prod.name}}
+							</ion-label>
+							<p>{{prod.price}} {{'PROFILE.money' | translate}}</p>
+						</ion-card-content>
+					</ion-card>
+				</div>
+			</ng-container>
+		</section>
+	</ng-container>
+</ion-content>

@@ -1,0 +1,198 @@
+{
+    "LANG" : {
+        "en" : "English",
+        "ar" : "Arabic"
+    },
+
+    "FORM" : {
+        "email" : "email",
+        "password" : "password",
+        "login" : "login",
+        "signup" : "signup",
+        "name" : "username",
+        "phone" : "phone",
+        "repassword" : "password again",
+        "forget" : "forget password ?"
+        
+    },
+
+    "MENU" : {
+        "home" : "Home",
+        "categories" : "Categories",
+        "wishlist" : "My Wishlist",
+        "account" : "My Account",
+        "rate" : "Rate US" ,
+        "share" : "Share" ,
+        "about" : "About",
+        "logout" : "Log out",
+        "search" : "Search",
+        "searchTitle" : "search",
+        "latest" : "Latest Products",
+        "welcome" :"hi , guest",
+        "orderDetail" : "Order Detail",
+        "offers" : "Hot Offers",
+        "featured" : "Featured Products",
+        "brands" : "Brands",
+        "privacy" : "Privacy Policy",
+        "terms" : "Terms & Conditions"
+    },
+
+    "PROFILE" : {
+        "create" : "Create Profile",
+        "edit" : "Edit",
+        "editTitle" : "Edit Profile",
+        "cancel" : "cancel" ,
+        "save" : "save",
+        "myAddress" : "My Address",
+        "myOrders" : "My Orders",
+        "newAddress" : "Add New Address",
+        "editAddress" : "Edit Address",
+        "change" : "Change",
+        "pincode" : "Pincode",
+        "country" : "Country",
+        "state" : "State",
+        "city" : "City",
+        "address" : "Address",
+        "default" : "make this my default address",
+        "orderId" : "Order ID" ,
+        "orderDate" : "Placed on",
+        "money" : "EGP",
+        "rate" : "Rate Now",
+        "waiting" : "Waiting",
+        "confirmed" : "Confirmed",
+        "completed" : "Completed",
+        "cancelled" : "cancelled",
+        "delete" : "delete",
+        "cancelOrder" : "Cancel Order"
+    },
+
+    "CART" : {
+        "cart" : "your Cart",
+        "amount" : "Total Amount",
+        "checkout" : "Proceed Checkout"
+    },
+
+    "ORDER" : {
+        "confirm"  :"Confirm Order",
+        "stepper" : {
+            "first" : {
+                "title" : "Address",
+                "desc" : "select your address"
+            },
+            "second" : {
+                "title" : "Shipping Zone",
+                "desc" : "check prices",
+                "other" : "other"
+            },
+            "third" : {
+                "title" : "Copouns",
+                "desc" : "have a copoun"
+            },
+            "fourth" : {
+                "title" : "Payment",
+                "desc" : "Check Payment"
+            },
+            "next" : "Next",
+            "previous" : "Previous"
+        },
+        "order" : "Order Now",
+        "choose" : "Choose Address",
+        "beforeDiscount" : "Before Discount",
+        "afterDiscount" : "After Discount",
+        "deliveryCost" : "Delivery Cost",
+        "total" : "Total Cost",
+        "discount" : "Discount",
+        "copoun" : "Copoun",
+        "verifyCopoun" : "Verify",
+        "contact" : "we will contact you to confirm shipping price",
+        "cancel" : "cancel",
+        "ok" : "ok"
+    },
+
+    "DETAIL" : {
+        "desc" : "Description",
+        "similar" : "Similar Products",
+        "more" : "View More",
+        "add" : "Add to cart",
+        "info" : "Product Details"
+    },
+
+    "RATING" : {
+        "rating" : "Rating",
+        "from" : "From",
+        "customer" : "Customer",
+        "comment" : "your comment",
+        "yourRating" : "Your Rating",
+        "newRating" : "New Rating"
+    },
+
+    "WELCOME" : {
+        "first" : "First , search for what you would like to order",
+        "second" : "Second , Choose what you like",
+        "third" : "Third , Add To Your Cart",
+        "finally" : "Finally , Successfull Shopping",
+        "start" : "start shopping",
+        "next" : "Next"
+    },
+
+    "MESSAGES" : {
+        "loading" : "please wait ...",
+        "error"  : "an error occurred , please try again later",
+        "delete" : "item deleted",
+        "updated" : "item updated",
+        "order"  : "order has been sent successfully , we will contact you as asap",
+        "instagram" : "sorry , you can not share via instagram",
+        "whatsapp" : "sorry , you can not share via whatsapp",
+        "twitter" : "sorry , you can not share via twitter",
+        "facebook" : "sorry , you can not share via facebook",
+        "rating" : "thanks for rating",
+        "login" : "please , login first ...",
+        "subscription" : {
+            "title" : "service stopped" ,
+            "message" : "market subscription is finished . market can not use mtgrk.com service now",
+            "ok" : "OK"
+        },
+        "notMatched" : "password is not the same",
+        "emailUsed" : "email is used before" ,
+        "phoneErr" : "phone number is not valid" ,
+        "resetAlert" : {
+            "title" : "reset password",
+            "message" : "Enter your email , please",
+            "placeholder" : "email ...",
+            "cancel" : "cancel" ,
+            "ok" : "reset"
+        },
+        "phoneAlert" : {
+            "title" : "Phone Number",
+            "message" : "Enter your phone number , please",
+            "placeholder" : "phone ...",
+            "cancel" : "cancel" ,
+            "ok" : "ok"
+        },
+        "deleteAlert" : {
+            "title" : "Confirm Deleting",
+            "message" : "Are you sure for deleting ?",
+            "cancel" : "cancel" ,
+            "ok" : "ok"
+        },
+        "resetEmail" : "check your inbox and follow instructions",
+        "notValidCopoun" : "sorry , the copoun is invalid",
+        "outDatedCopoun" : "sorry , the copoun is out of date" ,
+        "variableForm" : "please choose what type you want first",
+        "orderCancelled" : "order has been cancelled",
+        "productAdded" : "product added to cart",
+        "details" : "Details",
+        "agree" : "Agree to",
+        "and" : "and"
+    },
+
+    "All" : "All",
+
+    "FILTER": {
+        "price": {
+            "order": "Order by price",
+            "desc": "From higher to lower",
+            "asc": "From lower to higher"
+        }
+    }
+}

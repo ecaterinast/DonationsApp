@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header>
+   {{'MENU.customers' | translate}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (delete)="delete($event)" 
+    (edit)="edit($event)"
+    (create)="add($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+

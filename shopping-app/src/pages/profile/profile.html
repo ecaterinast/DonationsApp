@@ -1,0 +1,176 @@
+<ion-header mode="ios">
+	<ion-navbar color="white">
+
+		<ion-buttons left>
+			<button ion-button clear icon-only menuToggle>
+				<ion-icon name="ios-menu-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+
+		<ion-title>{{'MENU.account' | translate}}</ion-title>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="favourites()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="favouritesNo">
+					{{favouritesNo}}
+				</ion-badge>
+				<ion-icon name="heart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+
+		<ion-buttons right>
+			<button ion-button clear icon-only (click)="cart()">
+				<ion-badge color="danger" class="animated fadeIn" *ngIf="cartNo">
+					{{cartNo}}
+				</ion-badge>
+				<ion-icon name="ios-cart-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+
+	<div class="holder">
+		<!-- user data -->
+		<ion-toolbar color="white" *ngIf="customer" class="customer animated fadeIn">
+			<ion-item no-lines class="transparent">
+				<div item-start>
+					<label for="image">
+						<img *ngIf="!customer.facebookUserId"
+							[src]="dataService.baseURL + 'containers/users/download/' + customer.image"
+							onerror="this.onerror=null;this.src='assets/imgs/avatar.png';">
+						<img *ngIf="customer.facebookUserId" [src]="customer.image"
+							onerror="this.onerror=null;this.src='assets/imgs/logo.jpg';">
+					</label>
+					<input type="file" id="image" hidden (change)="onImageSelected($event)">
+				</div>
+				<h2>{{customer.name}}</h2>
+				<p>{{customer.phone}}</p>
+				<button ion-button clear item-end color="dark" (click)="edit()">
+					{{'PROFILE.edit' | translate}}
+				</button>
+			</ion-item>
+		</ion-toolbar>
+
+		<!--segment section -->
+		<ion-toolbar color="primary" mode="md" *ngIf="customer" class="animated fadeIn toolbar-custom">
+			<ion-segment [(ngModel)]="segment" mode="md" (ionChange)="segmentChanged($event)">
+				<ion-segment-button value="address">
+					{{'PROFILE.myAddress' | translate}}
+				</ion-segment-button>
+				<ion-segment-button value="orders">
+					{{'PROFILE.myOrders' | translate}}
+				</ion-segment-button>
+			</ion-segment>
+
+		</ion-toolbar>
+	</div>
+
+
+</ion-header>
+
+<ion-content class="bg">
+
+	<!-- customer section -->
+	<div padding-top [ngSwitch]="segment" *ngIf="customer">
+
+		<div *ngSwitchCase="'address'">
+			<!-- address section -->
+			<ion-card *ngFor="let address of customer.address; let i = index">
+				<ion-item text-wrap no-lines [ngClass]="direction">
+					<div class="index" item-start>
+						{{i+1}}
+					</div>
+					<ion-label>
+						<h2>
+							{{address.details}} , {{address.city}} , {{address.state}} - {{address.pincode}} ,
+							{{address.country}}
+						</h2>
+					</ion-label>
+					<button ion-button icon-only item-end color="primary" class="icon-btn white"
+						(click)="editAddress(address , i)">
+						<ion-icon name="create"></ion-icon>
+					</button>
+
+					<button ion-button icon-only item-end color="danger" class="icon-btn" (click)="deleteAddress(i)">
+						<ion-icon name="trash"></ion-icon>
+					</button>
+				</ion-item>
+			</ion-card>
+
+			<ion-fab bottom right>
+				<button ion-fab (click)="newAddress()" class="white">
+					<ion-icon name="add"></ion-icon>
+				</button>
+			</ion-fab>
+
+
+				<!-- empty section -->
+				<section class="empty-orders animated fadeIn" *ngIf="customer && customer.address.length == 0">
+					<img src="../../assets/imgs/leaves.png">
+				</section>
+
+		</div>
+
+		<div *ngSwitchCase="'orders'">
+
+			<!-- loading spinner -->
+			<ion-row justify-content-center class="loading" *ngIf="loading">
+				<ion-col col-1>
+					<ion-spinner name="bubbles"></ion-spinner>
+				</ion-col>
+			</ion-row>
+
+			<!-- orders -->
+			<div *ngIf="orders">
+				<ion-card text-wrap class="animated fadeIn" *ngFor="let order of orders; let i =index;"
+					[hidden]="loading" (click)="orderDetail(order)">
+					<ion-item [ngClass]="direction" no-lines>
+						<div class="index" item-start>
+							{{i+1}}
+						</div>
+						<ion-label>
+							<h2>#{{order.code}}</h2>
+							<h3>{{order.total}} {{'PROFILE.money' | translate}}</h3>
+							<p>{{order.createdAt | date:'dd/M/yyyy'}}</p>
+						</ion-label>
+
+						<!--order status-->
+						<div item-end>
+							<ion-chip color="secondary" *ngIf=" order.status == status.waiting">
+								{{'PROFILE.waiting' | translate}}
+							</ion-chip>
+
+							<ion-chip color="secondary" *ngIf=" order.status == status.confirmed">
+								{{'PROFILE.confirmed' | translate}}
+							</ion-chip>
+
+
+							<ion-chip color="secondary" *ngIf=" order.status == status.completed">
+								{{'PROFILE.completed' | translate}}
+							</ion-chip>
+
+
+							<ion-chip color="danger" *ngIf="order.status == status.cancelled">
+								{{'PROFILE.cancelled' | translate}}
+							</ion-chip>
+						</div>
+
+
+					</ion-item>
+				</ion-card>
+
+				<!-- empty section -->
+				<section class="empty-orders animated fadeIn" *ngIf="orders && orders.length == 0 && !loading">
+					<img src="../../assets/imgs/leaves.png">
+				</section>
+
+			</div>
+
+
+
+
+		</div>
+
+	</div>
+
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="orders">
+      <ion-icon name="cube"></ion-icon>
+      <ion-label>{{'TABS.orders' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="person"></ion-icon>
+      <ion-label>{{'TABS.profile' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="showControlPanel()">
+      <ion-icon name="desktop-outline"></ion-icon>
+      <ion-label>{{'TABS.controlPanel' | translate}}</ion-label>
+    </ion-tab-button>
+    
+  </ion-tab-bar>
+</ion-tabs>

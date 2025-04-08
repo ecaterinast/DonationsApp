@@ -1,0 +1,191 @@
+<nb-card>
+  <nb-card-header>
+    <button nbButton ghost (click)="back()">
+      <nb-icon icon="arrow-back-outline"></nb-icon>
+    </button>
+    {{'FORM.orderDetail' | translate}}
+  </nb-card-header>
+  <nb-card-body *ngIf="order">
+    <div class="row">
+      <!-- products -->
+      <div class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of order.products">
+            <nb-card accent="danger">
+
+              <nb-card-body class="text-center">
+                <div class="center">
+                  <img [src]="this.dataService.baseURL + 'containers/images/download/' + product.details.image">
+                </div>
+                <h2>
+                  {{product.details.name}}
+                </h2>
+                <p><strong>{{product.details.price}} {{'FORM.egMoney' | translate}}</strong></p>
+                <ng-container *ngIf="product.orderedVariables">
+                  <p *ngFor="let variable of product.orderedVariables">
+                       - {{variable.name}} -
+                  </p>
+                </ng-container>
+                <p>
+                  <strong>
+                    <nb-icon class="primary" icon="layers-outline"></nb-icon>
+                  </strong>
+                  {{product.amount}}
+                </p>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </div>
+
+      <!-- details -->
+      <div class="col">
+
+        <nb-card accent="success" [nbSpinner]="loading" nbSpinnerStatus="danger">
+          <nb-card-header>
+            {{'FORM.info' | translate}}
+          </nb-card-header>
+          <nb-card-body>
+
+            <div class="row">
+              <div class="col-1">
+                <strong>
+                  <nb-icon class="primary" icon="person-outline"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+                {{order.name}}
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-1">
+                <strong>
+                  <nb-icon class="primary" icon="phone-outline"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+                {{order.phone}}
+
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-1">
+                <strong>
+                  <nb-icon class="primary" icon="pin-outline"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+                {{order.address}}
+
+              </div>
+            </div>
+
+
+            <div class="row" *ngIf="order.copoun">
+              <div class="col-1">
+                <strong>
+                  <nb-icon icon="pricetags-outline" class="primary"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+
+                <p>
+                  <strong>{{'FORM.code' | translate}} : </strong> {{order.copoun.code}}
+                </p>
+
+                <p>
+                  <strong>{{'FORM.discount' | translate}} : </strong> {{order.copoun.discount}}%
+                </p>
+
+                <p>
+                  <strong>{{'FORM.validUntil' | translate}} : </strong> {{order.copoun.validUntil | date:'d/M/yyyy'}}
+                </p>
+
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-1">
+                <strong>
+                  <nb-icon class="primary" icon="credit-card-outline"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+                {{order.total}} {{'FORM.egMoney' | translate}} <span
+                  *ngIf="order.shippingZone == 'other'">{{'FORM.withoutShipping' | translate}} </span>
+
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-1">
+                <strong>
+                  <nb-icon class="primary" icon="clock-outline"></nb-icon>
+                </strong>
+              </div>
+              <div class="col">
+                {{order.createdAt | date:'d/M/yyyy'}}
+
+              </div>
+            </div>
+
+
+
+
+          </nb-card-body>
+
+          <nb-card-footer>
+
+            <button nbButton hero  status="danger"  *ngIf="order.status != status.cancelled" [hidden]="order.status == status.completed" class="m-1"
+              (click)="editOrder(status.cancelled)">
+              {{'FORM.cancel' | translate}}
+            </button>
+
+            <button nbButton hero status="info" *ngIf="order.status == status.waiting " class="m-1"
+              (click)="editOrder(status.confirmed)">
+              {{'FORM.confirm' | translate}}
+            </button>
+
+            <button nbButton hero status="success"  *ngIf="order.status == status.confirmed" class="m-1"
+              (click)="editOrder(status.completed)">
+              {{'FORM.completed' | translate}}
+            </button>
+
+
+
+            <div *ngIf="order.status == status.completed">
+              <p class="ok">
+                <strong>
+                  <nb-icon icon="car-outline"></nb-icon>
+                </strong>
+                <span class="custom">
+                  {{'FORM.completed' | translate}}
+                </span>
+              </p>
+            </div>
+
+
+            <div *ngIf="order.status == status.cancelled">
+              <p class="cancel">
+                <strong>
+                  <nb-icon icon="minus-circle-outline"></nb-icon>
+                </strong>
+                <span class="custom">
+                  {{'FORM.cancelled' | translate}}
+                </span>
+              </p>
+            </div>
+
+          </nb-card-footer>
+        </nb-card>
+
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

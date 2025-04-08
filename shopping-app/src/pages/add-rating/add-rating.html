@@ -1,0 +1,55 @@
+<ion-header mode="ios">
+  <ion-toolbar color="white">
+    <ion-title>
+		{{'RATING.newRating' | translate}}
+	</ion-title>
+
+    <ion-buttons right>
+    	<button ion-button clear icon-only (click)="dismiss()">
+    		<ion-icon name="close"></ion-icon>
+    	</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+	<!-- Rating Form -->
+	<ion-row justify-content-center class="animated fadeIn">
+		<ion-col col-12 col-sm-12 col-md-9>
+			<ion-card>
+				<ion-item class="gray_bg">
+					<div class="center">
+							<star-rating value="0" size="24" readonly="false" 
+							checkedcolor="gold" uncheckedcolor= "#c8c7cc" (rate)="onRate($event)">
+								
+							</star-rating>
+					</div>
+
+				<h2 text-center>
+					{{'RATING.yourRating' | translate}}
+				</h2>
+
+				</ion-item>
+				
+				<ion-card-content>
+					<form [formGroup]="form" novalidate (ngSubmit) = "onSubmit()">
+						<!-- comment -->
+						<ion-item no-lines class="custome-input"  mode="ios" no-lines [ngClass]="direction">
+							<ion-icon name="ios-quote-outline"  item-start></ion-icon>
+							<ion-input type="text" [placeholder]="'RATING.comment' | translate" formControlName="comment" required class="border"></ion-input>
+						</ion-item>
+
+						
+						<button ion-button block round color="dark" margin-top class="no-shadow" type="submit"  [disabled]="!form.valid || !rating">
+							{{'PROFILE.save' | translate}}
+						</button>
+						
+						
+					</form>
+				</ion-card-content>
+			</ion-card>
+		</ion-col>
+	</ion-row>
+
+
+</ion-content>

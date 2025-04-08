@@ -1,0 +1,12 @@
+<nb-card>
+  <img [src]="this.dataService.baseURL + 'containers/images/download/' + product.image">
+  <h6 class="mt-2 text-center">
+    {{product.name}}
+  </h6>
+  <div class="center pb-2">
+    <button nbButton class="m-1" ghost  status="success" (click)="edit()">
+      <nb-icon icon="edit"></nb-icon>
+      {{'FORM.edit' | translate}}
+    </button>
+  </div>
+</nb-card>

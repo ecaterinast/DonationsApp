@@ -1,0 +1,50 @@
+/*
+     Custom CSS
+*/
+html{
+    scroll-behavior: smooth;
+}
+#sidebar {
+    background: #0d75a0;
+    width: 270px;
+}
+#sidebar h1 .logo span {
+    color: rgb(221 221 221 / 98%);
+}
+#sidebar ul li a span {
+    color: rgba(255,255,255,.6);
+}
+#sidebar .custom-menu{
+    cursor: pointer;
+    z-index: 90001;
+}
+code {
+    background-color: #000611;
+    color: #ddd;
+    width: 50%;
+    display: block;
+    border-radius: 4px;
+    padding: 11px 20px;
+}
+#sidebar .custom-menu .btn.btn-primary:after{background:#0d75a0;}
+.footer p a{color: rgba(255,255,255,.5);}
+.section_wrapper{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.section_wrapper h1.main_title{
+    border-bottom: 1px solid #0d75a0;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.section_wrapper h2{
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+.sidebar_wrapper{
+    position: fixed;
+    width: 270px;
+}
+@media (max-width: 992px){
+    code{width:90%;}
+}

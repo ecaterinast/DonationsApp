@@ -1,0 +1,169 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'TABS.orderDetail' | translate}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar [ngClass]="direction" color="primary">
+    <ion-segment value="products" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="products">
+        <ion-label>{{'TABS.products' | translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="info">
+        <ion-label>{{'TABS.info' | translate}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [ngClass]="direction">
+
+  <!--refresher-->
+  <ion-refresher slot="fixed" (ionRefresh)="getOrder($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <!--loading spinner -->
+  <ion-row class="ion-justify-content-center ion-align-items-center full-height" *ngIf="loading">
+    <ion-col size="1">
+      <ion-spinner color="primary" class="animated fadeIn"></ion-spinner>
+    </ion-col>
+  </ion-row>
+
+  <!-- products -->
+  <section class="animated fadeIn" *ngIf="segment == 'products'">
+    <ion-row class="ion-justify-content-center" *ngIf="order">
+      <ion-col size="12" size-md="8" *ngFor="let product of order.products">
+        <ion-card mode="ios">
+          <ion-item [ngClass]="direction" lines="none">
+            <div class="avatar" slot="start">
+              <img [src]="this.dataService.baseURL + 'containers/images/download/' + product.details.image"
+              onerror="this.onerror=null;this.src='assets/images/logo.jpg'">
+            </div>
+            <ion-label>
+              <h2>
+                {{product.details.name}}
+              </h2>
+              <h3>
+               {{product.details.price}} {{'FORM.egMoney' | translate}}
+              </h3>
+              <ng-container *ngIf="product.orderedVariables">
+                <div class="variables" *ngFor="let variable of product.orderedVariables">
+                  <ion-chip color="primary">
+                    {{variable.name}}
+                  </ion-chip>
+                </div>
+              </ng-container>
+
+            </ion-label>
+
+            <ion-chip color="danger" slot="end">{{product.amount}}</ion-chip>
+
+
+          </ion-item>
+         
+        </ion-card>
+      </ion-col>
+
+
+    </ion-row>
+  </section>
+
+
+
+
+  <!-- customer info -->
+  <section class="animated fadeIn" *ngIf="segment == 'info'">
+
+    <ion-list *ngIf="order">
+      <ion-list-header>
+        #{{order.code}}
+      </ion-list-header>
+      <ion-item>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>{{order.name}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        <ion-label>
+          {{order.phone}}
+        </ion-label>
+        <ion-chip color="primary" (click)="call()">
+          {{'FORM.call' | translate}}
+        </ion-chip>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">{{order.address}}</ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="order.copoun">
+        <ion-icon name="pricetags-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>{{'FORM.code' | translate}} : {{order.copoun.code | uppercase}}</h2>
+          <h3>{{'FORM.discount' | translate}} : {{order.copoun.discount}}</h3>
+          <h3>{{'FORM.validUntil' | translate}} : {{order.copoun.validUntil | date:'dd/M/yyyy'}}</h3>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="cash" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          {{order.total}} {{'FORM.egMoney' | translate}}
+          <span *ngIf="order.shippingZone == 'other'">{{'MESSAGES.withoutShipping' | translate}}</span>
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="order.status == status.completed">
+        <ion-icon name="cart-outline" color="success" slot="start"></ion-icon>
+        <ion-text color="success">
+          {{'FORM.completed' | translate}}
+        </ion-text>
+      </ion-item>
+
+
+      <ion-item *ngIf="order.status == status.cancelled">
+        <ion-icon color="danger" name="remove-circle" slot="start"></ion-icon>
+        <ion-text color="danger">
+          {{'FORM.cancelled' | translate}}
+        </ion-text>
+      </ion-item>
+
+
+    </ion-list>
+
+
+
+
+    <div class="ion-padding ion-margin-top center" *ngIf="order">
+
+
+      <ion-button fill="outline" color='danger' class="animated fadeIn" *ngIf="order.status != status.cancelled"
+        [hidden]="order.status == status.completed" (click)="editOrder(status.cancelled)">
+        <ion-icon name="remove-circle" slot="start"></ion-icon>
+
+        {{'FORM.cancel' | translate}}
+      </ion-button>
+
+      <ion-button fill="outline" class="animated fadeIn" *ngIf="order.status == status.waiting " class="m-1"
+        (click)="editOrder(status.confirmed)">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        {{'FORM.confirm' | translate}}
+      </ion-button>
+
+
+      <ion-button fill="outline" class="animated fadeIn" *ngIf="order.status == status.confirmed" class="m-1"
+        (click)="editOrder(status.completed)">
+        <ion-icon slot="start" name="cart-outline"></ion-icon>
+        {{'FORM.completed' | translate}}
+      </ion-button>
+    </div>
+
+
+  </section>
+</ion-content>

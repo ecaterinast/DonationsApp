@@ -1,0 +1,57 @@
+.form-group {
+    margin-bottom: 1.14rem;
+}
+
+
+
+.margin-top{
+    margin-top: 1.14rem;
+}   
+
+.margin-left{
+    margin-left: 1rem;
+}   
+
+
+.section{
+    padding: 10px;
+}
+
+.value{
+    position: relative;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+
+
+    .close-btn{
+        position: absolute;
+        right: -5%;
+    }
+
+    input{
+        padding: 0.4375rem 1.5rem !important;
+    }
+}
+
+
+
+
+.end{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.next{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+
+img{
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+
