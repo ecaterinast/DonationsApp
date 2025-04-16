@@ -13,7 +13,7 @@
         "phone" : "phone",
         "repassword" : "password again",
         "forget" : "forget password ?"
-        
+
     },
 
     "MENU" : {
@@ -21,6 +21,7 @@
         "categories" : "Categories",
         "wishlist" : "My Wishlist",
         "account" : "My Account",
+        "items" : "items",
         "rate" : "Rate US" ,
         "share" : "Share" ,
         "about" : "About",

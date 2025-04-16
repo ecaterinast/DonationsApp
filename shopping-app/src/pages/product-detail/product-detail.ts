@@ -68,7 +68,7 @@ export class ProductDetailPage implements OnDestroy {
 
   // get product rating
   getProductRating() {
-    if(this.product.ratings) {
+    if(this.product && this.product.ratings) {
       this.productRating = this.calcRating(this.product.ratings);
     } else {
       this.dataService.getRating(this.product.id)
@@ -227,7 +227,7 @@ export class ProductDetailPage implements OnDestroy {
                     }
                   }
 
-                  //check if it is the same increase amount else add new one with new variables              
+                  //check if it is the same increase amount else add new one with new variables
                   if (sameOrder) {
                     product.amount += 1;
                   } else {
