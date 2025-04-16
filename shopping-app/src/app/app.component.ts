@@ -21,16 +21,18 @@ export class MyApp {
     private fcm : FCM , private functionsService : FunctionsProvider ,
     private events : Events) {
     this.platform.ready().then(() => {
+      //lang check
+      this.checkLang();
+      //status bar color
+      statusBar.overlaysWebView(false);
+      statusBar.backgroundColorByHexString('#222222');
+      //hide splash
+      splashScreen.hide();
+      //watch back button
+      this.watchBack();
+
+
       if (this.platform.is('cordova')) {
-        //lang check
-        this.checkLang();
-        //status bar color
-        statusBar.overlaysWebView(false);
-        statusBar.backgroundColorByHexString('#222222');
-        //hide splash
-        splashScreen.hide();
-        //watch back button
-        this.watchBack();
         //initialize fcm
         this.initializeFCM();
       }

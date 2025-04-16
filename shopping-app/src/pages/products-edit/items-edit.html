@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ itemId ? 'Edit Item' : 'Add Item' }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="itemForm" (ngSubmit)="saveItem()">
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Price</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Location</ion-label>
+    </ion-item>
+    <div style="height: 300px;">
+      <agm-map
+        [latitude]="mapCenter.lat"
+        [longitude]="mapCenter.lng"
+        (mapClick)="onMapClick($event)"
+      >
+        <agm-marker
+          [latitude]="itemForm.value.location?.lat || mapCenter.lat"
+          [longitude]="itemForm.value.location?.lng || mapCenter.lng"
+        ></agm-marker>
+      </agm-map>
+    </div>
+
+    <ion-button expand="block" type="submit" [disabled]="!itemForm.valid">
+      Save
+    </ion-button>
+  </form>
+</ion-content>

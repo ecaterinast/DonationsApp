@@ -5,17 +5,17 @@ export const MARKET = {
     appId : 'xxxxxxxxxxx',
     googlePlayLink : 'https://play.google.com/store/apps/details?id={{bundleId}}',
     appStoreURL : 'https://apps.apple.com/us/app/{{appName}}/id{{appId}}',
-    name  : "Marostore",   
+    name  : "Marostore",
     description : "an awesome ecommerce online shopping platform",
     languages : [
         {
-            code : 'ar',
-            direction : 'rtl'
-        },
-        {
             code : 'en',
             direction : 'ltr'
-        }
+        },
+      {
+        code : 'md',
+        direction : 'ltr'
+      }
     ],
     defaultLang : 'en'
 }
