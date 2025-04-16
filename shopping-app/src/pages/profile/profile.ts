@@ -116,10 +116,10 @@ export class ProfilePage implements OnDestroy {
                 this.customer.name = data.name;
                 let phone = parsePhoneNumberFromString(data.phone, 'EG')
                 if (phone) {
-                  if (!phone.isValid()) {
-                      let msg = this.translationService.translate('MESSAGES.phoneErr')
-                      return this.functionsService.presentToast(msg)
-                  } 
+                  // if (!phone.isValid()) {
+                  //     let msg = this.translationService.translate('MESSAGES.phoneErr')
+                  //     return this.functionsService.presentToast(msg)
+                  // } 
                   this.customer.phone = phone.number;
                   this.editCustomer();
 

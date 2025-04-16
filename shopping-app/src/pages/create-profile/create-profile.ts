@@ -70,16 +70,17 @@ export class CreateProfilePage {
     let isValidPhone = false;
     MARKET.countryCodes.forEach((code : CountryCode) => {
       let phone = parsePhoneNumberFromString(form.phone, code);
-      if (phone.isValid()) {
+     // if (phone.isValid()) {
         isValidPhone = true;
         this.phone = phone;
-      }
+     // }
     });
     if (!isValidPhone) {
       let msg = this.translationService.translate('MESSAGES.phoneErr')
       return this.functionsService.presentToast(msg)
     }
 
+    
     this.functionsService.presentLoading();
 
     this.dataService.newUser({ email: form.email, password: form.password, phone: this.phone.number, name: form.name })

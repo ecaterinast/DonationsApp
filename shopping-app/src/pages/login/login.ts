@@ -280,10 +280,10 @@ export class LoginPage {
                 let isValidPhone = false;
                 MARKET.countryCodes.forEach((code: CountryCode) => {
                   let phone = parsePhoneNumberFromString(data.phone, code);
-                  if (phone.isValid()) {
+                  //if (phone.isValid()) {
                     isValidPhone = true;
                     number = phone.number;
-                  }
+                 // }
                 });
 
                 if (!isValidPhone || !number) {
