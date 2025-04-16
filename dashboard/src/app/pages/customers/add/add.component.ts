@@ -71,9 +71,9 @@ export class AddComponent  implements OnInit {
      let phone = parsePhoneNumberFromString(form.phone, code);
      
       if (phone) {
-        if (!phone.isValid()) {
-          return this.functionsService.showToast('danger' , this.translateService.instant('MESSAGES.checkPhone') , '');
-        } 
+        // if (!phone.isValid()) {
+        //   return this.functionsService.showToast('danger' , this.translateService.instant('MESSAGES.checkPhone') , '');
+        // } 
         this.loading = true;
         this.phone = phone.number;
         if (this.userId) {
