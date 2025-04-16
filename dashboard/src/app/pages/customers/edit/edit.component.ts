@@ -66,9 +66,9 @@ export class EditComponent implements OnInit{
     let code : any = Config.countryCode;
      let phone = parsePhoneNumberFromString(form.phone, code)
       if (phone) {
-        if (!phone.isValid()) {
-          return this.functionsService.showToast('danger' , this.translateService.instant('MESSAGES.checkPhone') , '');
-        } 
+        // if (!phone.isValid()) {
+        //   return this.functionsService.showToast('danger' , this.translateService.instant('MESSAGES.checkPhone') , '');
+        // } 
         this.loading = true;
         this.phone = phone.number;
         this.saveImage();  
